@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="mc" name="MadCode" version="2.0" _section="Script">
+	<!-- copy this to /usr/share/gtksourceview-3.0/language-specs -->
+  <metadata>
+    <property name="mimetypes">text</property>
+    <property name="globs">*.mc</property>
+  </metadata>
+  <styles>
+    <style id="comment" name="Comment" map-to="def:comment"/>
+    <style id="doc-comment" name="doc-comment" map-to="def:doc-comment"/>
+    
+    <style id="preprocessor" name="Preprocessor" map-to="def:preprocessor"/>
+    <style id="included-file" name="Included File" map-to="def:string"/>
+    
+    <style id="string" name="String" map-to="def:string"/>
+    <style id="escaped-character" name="Escaped Character" map-to="def:special-char"/>
+    
+    <style id="hexadecimal" name="Hexadecimal number" map-to="def:base-n-integer"/>
+    
+    <style id="keyword" name="Keyword" map-to="def:keyword"/>
+    <style id="type" name="Data Type" map-to="def:type"/>
+    <style id="boolean" name="boolean" map-to="def:boolean"/>
+    <style id="none-value" name="None Value" map-to="def:special-constant"/>
+    
+    <style id="class" name="Class" map-to="def:identifier"/>
+    <style id="function" name="Function" map-to="def:identifier"/>
+    
+  </styles>
+  <definitions>
+    <context id="mc">
+      <include>
+
+				<context id="function" style-ref="function">
+          <match>\{|\}|\:</match>
+        </context>
+        
+        <context id="classes" style-ref="class">
+					<match>\$[A-Za-z][A-Za-z0-9_]*</match>
+				</context>
+				
+        
+        <context id="comment" style-ref="comment">
+          <start>(\/\/)|#</start>
+          <end>$</end>
+        </context>
+
+        <context id="string" end-at-line-end="true" style-ref="string">
+          <start>"</start>
+          <end>"</end>
+          <include>
+            <context id="escape" style-ref="escaped-character">
+              <match>\\.</match>
+            </context>
+          </include>
+        </context>
+
+				<context id="comment-multiline" style-ref="comment">
+          <start>\/\*</start>
+          <end>\*\/</end>
+          <include>
+            <context ref="def:in-comment"/>
+            <context id="net-address" style-ref="net-address" extend-parent="false">
+							<match>http:\/\/[^\s]*</match>
+    				</context>
+          </include>
+        </context>
+        
+        <context id="doc-comment" style-ref="doc-comment">
+          <start>[&apos;]{2}</start>
+          <end>[&apos;]{2}</end>
+          <include>
+          	<context ref="def:in-comment"/>
+            <context id="comment-note" style-ref="note" extend-parent="true">
+            	<match>(FIXME)</match>
+            </context>
+            <context id="reserved" style-ref="def:error" extend-parent="true">
+            	<match>(CAUTION)|\!</match>
+            </context>
+          </include>
+        </context>
+        
+        <context ref="def:decimal"/>
+        <context ref="def:float"/>
+        <context id="hexadecimal" style-ref="hexadecimal">
+    	  	<match>0(x|X)[0-9a-fA-F]+</match>
+		    </context>
+				
+				
+				<context id="turnary" style-ref="keyword">
+					<match>\?</match>
+				</context>
+        <context id="keywords" style-ref="keyword">
+          <keyword>if</keyword>
+          <keyword>else</keyword>
+          <keyword>for</keyword>
+          <keyword>while</keyword>
+          <keyword>is</keyword>
+          <keyword>isnt</keyword>
+          <keyword>not</keyword>
+          <keyword>and</keyword>
+          <keyword>or</keyword>
+          <keyword>print</keyword>
+          <keyword>exit</keyword>
+          <keyword>return</keyword>
+          <keyword>type</keyword>
+        </context>
+        
+        <context id="boolean" style-ref="boolean">
+        	<keyword>true</keyword>
+          <keyword>false</keyword>
+        </context>
+
+        <context id="types" style-ref="type">
+          <keyword>int</keyword>
+          <keyword>float</keyword>
+          <keyword>str</keyword>
+          <keyword>truth</keyword>
+          <keyword>list</keyword>
+        </context>
+        <context id="none-value" style-ref="none-value">
+    		  <keyword>none</keyword>
+		    </context>
+        <context id="include" style-ref="preprocessor">
+          <match>^import (".*")</match>
+          <include>
+            <context id="included-file"
+                     sub-pattern="1"
+                     style-ref="included-file"/>
+          </include>
+        </context>
+
+      </include>
+    </context>
+  </definitions>
+</language>
