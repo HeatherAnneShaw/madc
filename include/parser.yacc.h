@@ -1,4 +1,4 @@
-// A Bison parser, made by GNU Bison 3.7.
+// A Bison parser, made by GNU Bison 3.7.4.
 
 // Skeleton interface for Bison LALR(1) parsers in C++
 
@@ -45,7 +45,7 @@
 #ifndef YY_YY_INCLUDE_PARSER_YACC_H_INCLUDED
 # define YY_YY_INCLUDE_PARSER_YACC_H_INCLUDED
 // "%code requires" blocks.
-#line 28 "./src/parser.ypp"
+#line 28 "./src/parser.y"
 
 	#include <ast/ast.h>
 	
@@ -99,11 +99,6 @@
 # define YY_CONSTEXPR
 #endif
 
-
-#ifndef YY_ASSERT
-# include <cassert>
-# define YY_ASSERT assert
-#endif
 
 
 #ifndef YY_ATTRIBUTE_PURE
@@ -186,9 +181,9 @@
 # define YYDEBUG 0
 #endif
 
-#line 11 "./src/parser.ypp"
+#line 11 "./src/parser.y"
 namespace yy {
-#line 192 "./include/parser.yacc.h"
+#line 187 "./include/parser.yacc.h"
 
 
 
@@ -218,7 +213,6 @@ namespace yy {
     template <typename T>
     semantic_type (YY_RVREF (T) t)
     {
-      YY_ASSERT (sizeof (T) <= size);
       new (yyas_<T> ()) T (YY_MOVE (t));
     }
 
@@ -708,7 +702,7 @@ namespace yy {
       /// Copy constructor.
       basic_symbol (const basic_symbol& that);
 
-      /// Constructor for valueless symbols, and symbols from each type.
+      /// Constructors for typed symbols.
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t)
         : Base (t)
@@ -718,6 +712,7 @@ namespace yy {
         : Base (t)
       {}
 #endif
+
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, AstNode*&& v)
         : Base (t)
@@ -729,6 +724,7 @@ namespace yy {
         , value (v)
       {}
 #endif
+
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, FunctionCallNode*&& v)
         : Base (t)
@@ -740,6 +736,7 @@ namespace yy {
         , value (v)
       {}
 #endif
+
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, FunctionNode*&& v)
         : Base (t)
@@ -751,6 +748,7 @@ namespace yy {
         , value (v)
       {}
 #endif
+
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, IfNode*&& v)
         : Base (t)
@@ -762,6 +760,7 @@ namespace yy {
         , value (v)
       {}
 #endif
+
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, ListNode*&& v)
         : Base (t)
@@ -773,6 +772,7 @@ namespace yy {
         , value (v)
       {}
 #endif
+
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, RootNode*&& v)
         : Base (t)
@@ -784,6 +784,7 @@ namespace yy {
         , value (v)
       {}
 #endif
+
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, Type&& v)
         : Base (t)
@@ -795,6 +796,7 @@ namespace yy {
         , value (v)
       {}
 #endif
+
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, bool&& v)
         : Base (t)
@@ -806,6 +808,7 @@ namespace yy {
         , value (v)
       {}
 #endif
+
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, double&& v)
         : Base (t)
@@ -817,6 +820,7 @@ namespace yy {
         , value (v)
       {}
 #endif
+
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, int&& v)
         : Base (t)
@@ -828,6 +832,7 @@ namespace yy {
         , value (v)
       {}
 #endif
+
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, std::list<std::tuple<std::string, Type>>&& v)
         : Base (t)
@@ -839,6 +844,7 @@ namespace yy {
         , value (v)
       {}
 #endif
+
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, std::string&& v)
         : Base (t)
@@ -850,6 +856,7 @@ namespace yy {
         , value (v)
       {}
 #endif
+
 #if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, std::vector<AstNode*>&& v)
         : Base (t)
@@ -1028,55 +1035,35 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       symbol_type (int tok)
         : super_type(token_type (tok))
-      {
-        YY_ASSERT (tok == token::TOK_YYEOF || tok == token::TOK_YYerror || tok == token::TOK_YYUNDEF || tok == token::TOK_LAND || tok == token::TOK_LOR || tok == token::TOK_LEQ || tok == token::TOK_LNEQ || tok == token::TOK_LTEQ || tok == token::TOK_GTEQ || tok == token::TOK_POW || tok == token::TOK_RETURNS || tok == token::TOK_EXIT || tok == token::TOK_PRINT || tok == token::TOK_IF || tok == token::TOK_ELSE || tok == token::TOK_WHILE || tok == token::TOK_FOR || tok == token::TOK_TRUE || tok == token::TOK_FALSE || tok == token::TOK_IMPORT || tok == token::TOK_IRUN || tok == token::TOK_ISTART || tok == token::TOK_IROOT || tok == token::TOK_TYPE_INT || tok == token::TOK_TYPE_FLOAT || tok == token::TOK_TYPE_STRING || tok == token::TOK_TYPE_NONE || tok == token::TOK_TYPE_TRUTH || tok == token::TOK_TYPE_LIST || tok == token::TOK_TYPE || tok == 44 || tok == 61 || tok == 60 || tok == 62 || tok == 38 || tok == 124 || tok == 94 || tok == 43 || tok == 45 || tok == 42 || tok == 47 || tok == 37 || tok == 40 || tok == 41 || tok == token::TOK_ADDEQ || tok == token::TOK_SUBEQ || tok == token::TOK_POWEQ || tok == token::TOK_MULEQ || tok == token::TOK_DIVEQ || tok == token::TOK_MODEQ || tok == token::TOK_BANDEQ || tok == token::TOK_BOREQ || tok == token::TOK_BXOREQ || tok == token::TOK_ADDADD || tok == token::TOK_SUBSUB || tok == token::TOK_NEG || tok == token::TOK_NOT || tok == 33 || tok == 58 || tok == 59 || tok == token::TOK_NO_ELSE || tok == 91 || tok == 93 || tok == 123 || tok == 125);
-      }
 #else
       symbol_type (int tok)
         : super_type(token_type (tok))
-      {
-        YY_ASSERT (tok == token::TOK_YYEOF || tok == token::TOK_YYerror || tok == token::TOK_YYUNDEF || tok == token::TOK_LAND || tok == token::TOK_LOR || tok == token::TOK_LEQ || tok == token::TOK_LNEQ || tok == token::TOK_LTEQ || tok == token::TOK_GTEQ || tok == token::TOK_POW || tok == token::TOK_RETURNS || tok == token::TOK_EXIT || tok == token::TOK_PRINT || tok == token::TOK_IF || tok == token::TOK_ELSE || tok == token::TOK_WHILE || tok == token::TOK_FOR || tok == token::TOK_TRUE || tok == token::TOK_FALSE || tok == token::TOK_IMPORT || tok == token::TOK_IRUN || tok == token::TOK_ISTART || tok == token::TOK_IROOT || tok == token::TOK_TYPE_INT || tok == token::TOK_TYPE_FLOAT || tok == token::TOK_TYPE_STRING || tok == token::TOK_TYPE_NONE || tok == token::TOK_TYPE_TRUTH || tok == token::TOK_TYPE_LIST || tok == token::TOK_TYPE || tok == 44 || tok == 61 || tok == 60 || tok == 62 || tok == 38 || tok == 124 || tok == 94 || tok == 43 || tok == 45 || tok == 42 || tok == 47 || tok == 37 || tok == 40 || tok == 41 || tok == token::TOK_ADDEQ || tok == token::TOK_SUBEQ || tok == token::TOK_POWEQ || tok == token::TOK_MULEQ || tok == token::TOK_DIVEQ || tok == token::TOK_MODEQ || tok == token::TOK_BANDEQ || tok == token::TOK_BOREQ || tok == token::TOK_BXOREQ || tok == token::TOK_ADDADD || tok == token::TOK_SUBSUB || tok == token::TOK_NEG || tok == token::TOK_NOT || tok == 33 || tok == 58 || tok == 59 || tok == token::TOK_NO_ELSE || tok == 91 || tok == 93 || tok == 123 || tok == 125);
-      }
 #endif
+      {}
 #if 201103L <= YY_CPLUSPLUS
       symbol_type (int tok, double v)
         : super_type(token_type (tok), std::move (v))
-      {
-        YY_ASSERT (tok == token::TOK_FLOAT);
-      }
 #else
       symbol_type (int tok, const double& v)
         : super_type(token_type (tok), v)
-      {
-        YY_ASSERT (tok == token::TOK_FLOAT);
-      }
 #endif
+      {}
 #if 201103L <= YY_CPLUSPLUS
       symbol_type (int tok, int v)
         : super_type(token_type (tok), std::move (v))
-      {
-        YY_ASSERT (tok == token::TOK_INT);
-      }
 #else
       symbol_type (int tok, const int& v)
         : super_type(token_type (tok), v)
-      {
-        YY_ASSERT (tok == token::TOK_INT);
-      }
 #endif
+      {}
 #if 201103L <= YY_CPLUSPLUS
       symbol_type (int tok, std::string v)
         : super_type(token_type (tok), std::move (v))
-      {
-        YY_ASSERT (tok == token::TOK_STRING || tok == token::TOK_VAR);
-      }
 #else
       symbol_type (int tok, const std::string& v)
         : super_type(token_type (tok), v)
-      {
-        YY_ASSERT (tok == token::TOK_STRING || tok == token::TOK_VAR);
-      }
 #endif
+      {}
     };
 
     /// Build a parser object.
@@ -2422,9 +2409,9 @@ switch (yykind)
     return this->kind ();
   }
 
-#line 11 "./src/parser.ypp"
+#line 11 "./src/parser.y"
 } // yy
-#line 2428 "./include/parser.yacc.h"
+#line 2415 "./include/parser.yacc.h"
 
 
 

@@ -37,7 +37,7 @@
 
 
 // First part of user prologue.
-#line 19 "./src/parser.ypp"
+#line 19 "./src/parser.y"
 
   
   #include <parser.lex.h>
@@ -123,7 +123,7 @@
 #define YYERROR         goto yyerrorlab
 #define YYRECOVERING()  (!!yyerrstatus_)
 
-#line 11 "./src/parser.ypp"
+#line 11 "./src/parser.y"
 namespace yy {
 #line 129 "src/parser.yacc.cc"
 
@@ -780,19 +780,19 @@ namespace yy {
           switch (yyn)
             {
   case 2: // run: block
-#line 143 "./src/parser.ypp"
+#line 143 "./src/parser.y"
                                                                                 { if(yystack_[0].value.as < RootNode* > ()) yystack_[0].value.as < RootNode* > ()->walk(); }
 #line 786 "src/parser.yacc.cc"
     break;
 
   case 3: // block: %empty
-#line 147 "./src/parser.ypp"
+#line 147 "./src/parser.y"
                                                                                                 { yylhs.value.as < RootNode* > () = new RootNode; }
 #line 792 "src/parser.yacc.cc"
     break;
 
   case 4: // block: block statement ';'
-#line 158 "./src/parser.ypp"
+#line 158 "./src/parser.y"
                                                 {
 			if (yystack_[1].value.as < AstNode* > () != NULL)	// cathces special case of empty statements not filtered by lex
 				yylhs.value.as < RootNode* > () = yystack_[2].value.as < RootNode* > ()->attach_statement(yystack_[1].value.as < AstNode* > ());
@@ -802,115 +802,115 @@ namespace yy {
     break;
 
   case 5: // block: block if_statement
-#line 163 "./src/parser.ypp"
+#line 163 "./src/parser.y"
                                                         { yylhs.value.as < RootNode* > () = yystack_[1].value.as < RootNode* > ()->attach_statement(yystack_[0].value.as < IfNode* > ()); }
 #line 808 "src/parser.yacc.cc"
     break;
 
   case 6: // block: block loop_statement
-#line 164 "./src/parser.ypp"
+#line 164 "./src/parser.y"
                                                 { yylhs.value.as < RootNode* > () = yystack_[1].value.as < RootNode* > ()->attach_statement(yystack_[0].value.as < AstNode* > ()); }
 #line 814 "src/parser.yacc.cc"
     break;
 
   case 7: // block: block function_statement
-#line 165 "./src/parser.ypp"
+#line 165 "./src/parser.y"
                                         { yylhs.value.as < RootNode* > () = yystack_[1].value.as < RootNode* > ()->attach_statement(yystack_[0].value.as < FunctionNode* > ()); }
 #line 820 "src/parser.yacc.cc"
     break;
 
   case 8: // type_statement: TYPE_NONE
-#line 177 "./src/parser.ypp"
+#line 177 "./src/parser.y"
                                                 {yylhs.value.as < Type > () = NONE;}
 #line 826 "src/parser.yacc.cc"
     break;
 
   case 9: // type_statement: TYPE_INT
-#line 178 "./src/parser.ypp"
+#line 178 "./src/parser.y"
                                         {yylhs.value.as < Type > () = INT;}
 #line 832 "src/parser.yacc.cc"
     break;
 
   case 10: // type_statement: TYPE_FLOAT
-#line 179 "./src/parser.ypp"
+#line 179 "./src/parser.y"
                                 {yylhs.value.as < Type > () = FLOAT;}
 #line 838 "src/parser.yacc.cc"
     break;
 
   case 11: // type_statement: TYPE_STRING
-#line 180 "./src/parser.ypp"
+#line 180 "./src/parser.y"
                                 {yylhs.value.as < Type > () = STRING;}
 #line 844 "src/parser.yacc.cc"
     break;
 
   case 12: // type_statement: TYPE_TRUTH
-#line 181 "./src/parser.ypp"
+#line 181 "./src/parser.y"
                                 {yylhs.value.as < Type > () = TRUTH;}
 #line 850 "src/parser.yacc.cc"
     break;
 
   case 13: // type_statement: TYPE_LIST
-#line 182 "./src/parser.ypp"
+#line 182 "./src/parser.y"
                                         {yylhs.value.as < Type > () = LIST;}
 #line 856 "src/parser.yacc.cc"
     break;
 
   case 14: // statement: expression
-#line 187 "./src/parser.ypp"
+#line 187 "./src/parser.y"
                                                                 { yylhs.value.as < AstNode* > () = yystack_[0].value.as < AstNode* > (); }
 #line 862 "src/parser.yacc.cc"
     break;
 
   case 15: // statement: PRINT expression
-#line 188 "./src/parser.ypp"
+#line 188 "./src/parser.y"
                                         { yylhs.value.as < AstNode* > () = new BuiltinNode(PRINT, yystack_[0].value.as < AstNode* > ()); }
 #line 868 "src/parser.yacc.cc"
     break;
 
   case 16: // statement: EXIT expression
-#line 189 "./src/parser.ypp"
+#line 189 "./src/parser.y"
                                         { yylhs.value.as < AstNode* > () = new BuiltinNode(EXIT, yystack_[0].value.as < AstNode* > ()); }
 #line 874 "src/parser.yacc.cc"
     break;
 
   case 17: // statement: RETURNS expression
-#line 190 "./src/parser.ypp"
+#line 190 "./src/parser.y"
                                 { yylhs.value.as < AstNode* > () = new FunctionReturnNode(yystack_[0].value.as < AstNode* > ()); }
 #line 880 "src/parser.yacc.cc"
     break;
 
   case 18: // TRUTH: FALSE
-#line 195 "./src/parser.ypp"
+#line 195 "./src/parser.y"
                                         { yylhs.value.as < bool > () = 0; }
 #line 886 "src/parser.yacc.cc"
     break;
 
   case 19: // TRUTH: TRUE
-#line 196 "./src/parser.ypp"
+#line 196 "./src/parser.y"
                                 { yylhs.value.as < bool > () = 1; }
 #line 892 "src/parser.yacc.cc"
     break;
 
   case 20: // expression_list: expression ',' expression
-#line 201 "./src/parser.ypp"
+#line 201 "./src/parser.y"
                                                                         { yylhs.value.as < std::vector<AstNode*> > ().push_back(yystack_[2].value.as < AstNode* > ()); yylhs.value.as < std::vector<AstNode*> > ().push_back(yystack_[0].value.as < AstNode* > ());}
 #line 898 "src/parser.yacc.cc"
     break;
 
   case 21: // expression_list: expression_list ',' expression
-#line 202 "./src/parser.ypp"
+#line 202 "./src/parser.y"
                                                 { yylhs.value.as < std::vector<AstNode*> > ().insert(yylhs.value.as < std::vector<AstNode*> > ().begin(), yystack_[2].value.as < std::vector<AstNode*> > ().begin(), yystack_[2].value.as < std::vector<AstNode*> > ().end()); yylhs.value.as < std::vector<AstNode*> > ().push_back(yystack_[0].value.as < AstNode* > ()); }
 #line 904 "src/parser.yacc.cc"
     break;
 
   case 22: // list_expression: '[' expression_list ']'
-#line 207 "./src/parser.ypp"
+#line 207 "./src/parser.y"
                                                 { yylhs.value.as < ListNode* > () = new ListNode(yystack_[1].value.as < std::vector<AstNode*> > ()); }
 #line 910 "src/parser.yacc.cc"
     break;
 
   case 23: // list_expression: '[' expression ']'
-#line 208 "./src/parser.ypp"
+#line 208 "./src/parser.y"
                                                                 {
 			yylhs.value.as < ListNode* > () = new ListNode(std::vector<AstNode*>({yystack_[1].value.as < AstNode* > ()}));
 	}
@@ -918,247 +918,247 @@ namespace yy {
     break;
 
   case 24: // expression: %empty
-#line 213 "./src/parser.ypp"
+#line 213 "./src/parser.y"
                                                                                                 {;}
 #line 924 "src/parser.yacc.cc"
     break;
 
   case 25: // expression: INT
-#line 214 "./src/parser.ypp"
+#line 214 "./src/parser.y"
                                                                                                                 { yylhs.value.as < AstNode* > () = new IntNode(yystack_[0].value.as < int > ()); }
 #line 930 "src/parser.yacc.cc"
     break;
 
   case 26: // expression: TRUTH
-#line 215 "./src/parser.ypp"
+#line 215 "./src/parser.y"
                                                                                                         { yylhs.value.as < AstNode* > () = new TruthNode(yystack_[0].value.as < bool > ()); }
 #line 936 "src/parser.yacc.cc"
     break;
 
   case 27: // expression: FLOAT
-#line 216 "./src/parser.ypp"
+#line 216 "./src/parser.y"
                                                                                                         { yylhs.value.as < AstNode* > () = new FloatNode(yystack_[0].value.as < double > ()); }
 #line 942 "src/parser.yacc.cc"
     break;
 
   case 28: // expression: STRING
-#line 217 "./src/parser.ypp"
+#line 217 "./src/parser.y"
                                                                                                         { yylhs.value.as < AstNode* > () = new StringNode(yystack_[0].value.as < std::string > ()); }
 #line 948 "src/parser.yacc.cc"
     break;
 
   case 29: // expression: TYPE_NONE
-#line 218 "./src/parser.ypp"
+#line 218 "./src/parser.y"
                                                                                                 { yylhs.value.as < AstNode* > () = new NoneNode(); }
 #line 954 "src/parser.yacc.cc"
     break;
 
   case 30: // expression: VAR '=' expression
-#line 219 "./src/parser.ypp"
+#line 219 "./src/parser.y"
                                                                 { yylhs.value.as < AstNode* > () = new AssignmentNode(yystack_[2].value.as < std::string > (), yystack_[0].value.as < AstNode* > ()); }
 #line 960 "src/parser.yacc.cc"
     break;
 
   case 31: // expression: VAR
-#line 220 "./src/parser.ypp"
+#line 220 "./src/parser.y"
                                                                                                                 { yylhs.value.as < AstNode* > () = new SymbolReference(yystack_[0].value.as < std::string > ()); }
 #line 966 "src/parser.yacc.cc"
     break;
 
   case 32: // expression: list_expression
-#line 221 "./src/parser.ypp"
+#line 221 "./src/parser.y"
                                                                                 { yylhs.value.as < AstNode* > () = yystack_[0].value.as < ListNode* > (); }
 #line 972 "src/parser.yacc.cc"
     break;
 
   case 33: // expression: TYPE expression
-#line 222 "./src/parser.ypp"
+#line 222 "./src/parser.y"
                                                                         { yylhs.value.as < AstNode* > () = new BuiltinNode(TYPE, yystack_[0].value.as < AstNode* > ()); }
 #line 978 "src/parser.yacc.cc"
     break;
 
   case 34: // expression: NOT expression
-#line 223 "./src/parser.ypp"
+#line 223 "./src/parser.y"
                                                 { yylhs.value.as < AstNode* > () = new MathNode(BNOT, NULL, yystack_[0].value.as < AstNode* > ()); }
 #line 984 "src/parser.yacc.cc"
     break;
 
   case 35: // expression: '(' expression ')'
-#line 224 "./src/parser.ypp"
+#line 224 "./src/parser.y"
                                                                 { yylhs.value.as < AstNode* > () = yystack_[1].value.as < AstNode* > (); }
 #line 990 "src/parser.yacc.cc"
     break;
 
   case 36: // expression: expression '+' expression
-#line 225 "./src/parser.ypp"
+#line 225 "./src/parser.y"
                                                 { yylhs.value.as < AstNode* > () = new MathNode(ADD, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 996 "src/parser.yacc.cc"
     break;
 
   case 37: // expression: expression '-' expression
-#line 226 "./src/parser.ypp"
+#line 226 "./src/parser.y"
                                                 { yylhs.value.as < AstNode* > () = new MathNode(SUB, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1002 "src/parser.yacc.cc"
     break;
 
   case 38: // expression: expression '*' expression
-#line 227 "./src/parser.ypp"
+#line 227 "./src/parser.y"
                                                 { yylhs.value.as < AstNode* > () = new MathNode(MUL, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1008 "src/parser.yacc.cc"
     break;
 
   case 39: // expression: expression '/' expression
-#line 228 "./src/parser.ypp"
+#line 228 "./src/parser.y"
                                                 { yylhs.value.as < AstNode* > () = new MathNode(DIV, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1014 "src/parser.yacc.cc"
     break;
 
   case 40: // expression: expression '%' expression
-#line 229 "./src/parser.ypp"
+#line 229 "./src/parser.y"
                                                 { yylhs.value.as < AstNode* > () = new MathNode(MOD, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1020 "src/parser.yacc.cc"
     break;
 
   case 41: // expression: expression POW expression
-#line 230 "./src/parser.ypp"
+#line 230 "./src/parser.y"
                                                 { yylhs.value.as < AstNode* > () = new MathNode(POW, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1026 "src/parser.yacc.cc"
     break;
 
   case 42: // expression: expression '&' expression
-#line 231 "./src/parser.ypp"
+#line 231 "./src/parser.y"
                                                 { yylhs.value.as < AstNode* > () = new MathNode(BAND, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1032 "src/parser.yacc.cc"
     break;
 
   case 43: // expression: expression '|' expression
-#line 232 "./src/parser.ypp"
+#line 232 "./src/parser.y"
                                                 { yylhs.value.as < AstNode* > () = new MathNode(BOR, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1038 "src/parser.yacc.cc"
     break;
 
   case 44: // expression: expression '^' expression
-#line 233 "./src/parser.ypp"
+#line 233 "./src/parser.y"
                                                 { yylhs.value.as < AstNode* > () = new MathNode(BXOR, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1044 "src/parser.yacc.cc"
     break;
 
   case 45: // expression: expression LEQ expression
-#line 234 "./src/parser.ypp"
+#line 234 "./src/parser.y"
                                                 { yylhs.value.as < AstNode* > () = new MathNode(LEQ, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1050 "src/parser.yacc.cc"
     break;
 
   case 46: // expression: expression LNEQ expression
-#line 235 "./src/parser.ypp"
+#line 235 "./src/parser.y"
                                         { yylhs.value.as < AstNode* > () = new MathNode(LNEQ, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1056 "src/parser.yacc.cc"
     break;
 
   case 47: // expression: expression LAND expression
-#line 236 "./src/parser.ypp"
+#line 236 "./src/parser.y"
                                         { yylhs.value.as < AstNode* > () = new MathNode(LAND, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1062 "src/parser.yacc.cc"
     break;
 
   case 48: // expression: expression LOR expression
-#line 237 "./src/parser.ypp"
+#line 237 "./src/parser.y"
                                                 { yylhs.value.as < AstNode* > () = new MathNode(LOR, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1068 "src/parser.yacc.cc"
     break;
 
   case 49: // expression: expression '<' expression
-#line 238 "./src/parser.ypp"
+#line 238 "./src/parser.y"
                                                 { yylhs.value.as < AstNode* > () = new MathNode(LT, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1074 "src/parser.yacc.cc"
     break;
 
   case 50: // expression: expression '>' expression
-#line 239 "./src/parser.ypp"
+#line 239 "./src/parser.y"
                                                 { yylhs.value.as < AstNode* > () = new MathNode(GT, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1080 "src/parser.yacc.cc"
     break;
 
   case 51: // expression: expression LTEQ expression
-#line 240 "./src/parser.ypp"
+#line 240 "./src/parser.y"
                                         { yylhs.value.as < AstNode* > () = new MathNode(LTEQ, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1086 "src/parser.yacc.cc"
     break;
 
   case 52: // expression: expression GTEQ expression
-#line 241 "./src/parser.ypp"
+#line 241 "./src/parser.y"
                                         { yylhs.value.as < AstNode* > () = new MathNode(GTEQ, yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1092 "src/parser.yacc.cc"
     break;
 
   case 53: // expression: function_expression
-#line 242 "./src/parser.ypp"
+#line 242 "./src/parser.y"
                                                                 { yylhs.value.as < AstNode* > () = yystack_[0].value.as < FunctionCallNode* > (); }
 #line 1098 "src/parser.yacc.cc"
     break;
 
   case 54: // expression: IF expression ':' expression ':' expression
-#line 243 "./src/parser.ypp"
+#line 243 "./src/parser.y"
                                                       { yylhs.value.as < AstNode* > () = new IfNode(yystack_[4].value.as < AstNode* > (), yystack_[2].value.as < AstNode* > (), yystack_[0].value.as < AstNode* > ()); }
 #line 1104 "src/parser.yacc.cc"
     break;
 
   case 55: // input_list: %empty
-#line 260 "./src/parser.ypp"
+#line 260 "./src/parser.y"
                                                                                                                 { yylhs.value.as < std::list<std::tuple<std::string, Type>> > (); }
 #line 1110 "src/parser.yacc.cc"
     break;
 
   case 56: // input_list: type_statement VAR
-#line 261 "./src/parser.ypp"
+#line 261 "./src/parser.y"
                                                                                         { yylhs.value.as < std::list<std::tuple<std::string, Type>> > ().push_back(std::make_tuple(yystack_[0].value.as < std::string > (), yystack_[1].value.as < Type > ()));}
 #line 1116 "src/parser.yacc.cc"
     break;
 
   case 57: // input_list: input_list ',' type_statement VAR
-#line 262 "./src/parser.ypp"
+#line 262 "./src/parser.y"
                                                 { yylhs.value.as < std::list<std::tuple<std::string, Type>> > ().splice(yylhs.value.as < std::list<std::tuple<std::string, Type>> > ().begin(), yystack_[3].value.as < std::list<std::tuple<std::string, Type>> > ());yylhs.value.as < std::list<std::tuple<std::string, Type>> > ().push_back(std::make_tuple(yystack_[0].value.as < std::string > (), yystack_[1].value.as < Type > ())); }
 #line 1122 "src/parser.yacc.cc"
     break;
 
   case 58: // function_statement: VAR type_statement '{' block '}'
-#line 267 "./src/parser.ypp"
+#line 267 "./src/parser.y"
                                          { yylhs.value.as < FunctionNode* > () = new FunctionNode(yystack_[4].value.as < std::string > (), {}, yystack_[3].value.as < Type > (), yystack_[1].value.as < RootNode* > ()); }
 #line 1128 "src/parser.yacc.cc"
     break;
 
   case 59: // function_statement: VAR type_statement ':' expression ';'
-#line 268 "./src/parser.ypp"
+#line 268 "./src/parser.y"
                                                 { yylhs.value.as < FunctionNode* > () = new FunctionNode(yystack_[4].value.as < std::string > (), {}, yystack_[3].value.as < Type > (), yystack_[1].value.as < AstNode* > ()); }
 #line 1134 "src/parser.yacc.cc"
     break;
 
   case 60: // function_statement: VAR input_list ':' type_statement ':' expression ';'
-#line 269 "./src/parser.ypp"
+#line 269 "./src/parser.y"
                                                                { yylhs.value.as < FunctionNode* > () = new FunctionNode(yystack_[6].value.as < std::string > (), yystack_[5].value.as < std::list<std::tuple<std::string, Type>> > (), yystack_[3].value.as < Type > (), yystack_[1].value.as < AstNode* > ()); }
 #line 1140 "src/parser.yacc.cc"
     break;
 
   case 61: // function_statement: VAR input_list ':' type_statement '{' block '}'
-#line 270 "./src/parser.ypp"
+#line 270 "./src/parser.y"
                                                           { yylhs.value.as < FunctionNode* > () = new FunctionNode(yystack_[6].value.as < std::string > (), yystack_[5].value.as < std::list<std::tuple<std::string, Type>> > (), yystack_[3].value.as < Type > (), yystack_[1].value.as < RootNode* > ()); }
 #line 1146 "src/parser.yacc.cc"
     break;
 
   case 62: // function_statement: VAR input_list '{' block '}'
-#line 271 "./src/parser.ypp"
+#line 271 "./src/parser.y"
                                        { yylhs.value.as < FunctionNode* > () = new FunctionNode(yystack_[4].value.as < std::string > (), yystack_[3].value.as < std::list<std::tuple<std::string, Type>> > (), NONE, yystack_[1].value.as < RootNode* > ()); }
 #line 1152 "src/parser.yacc.cc"
     break;
 
   case 63: // function_expression: VAR '(' expression_list ')'
-#line 277 "./src/parser.ypp"
+#line 277 "./src/parser.y"
                                     { yylhs.value.as < FunctionCallNode* > () = new FunctionCallNode(yystack_[3].value.as < std::string > (), yystack_[1].value.as < std::vector<AstNode*> > ()); }
 #line 1158 "src/parser.yacc.cc"
     break;
 
   case 64: // function_expression: VAR '(' expression ')'
-#line 278 "./src/parser.ypp"
+#line 278 "./src/parser.y"
                                                         {
 			yylhs.value.as < FunctionCallNode* > () = new FunctionCallNode(yystack_[3].value.as < std::string > (), std::vector<AstNode*>({yystack_[1].value.as < AstNode* > ()}));
 	}
@@ -1166,49 +1166,49 @@ namespace yy {
     break;
 
   case 65: // if_statement: IF expression '{' block '}'
-#line 285 "./src/parser.ypp"
+#line 285 "./src/parser.y"
                                                                                                                         { yylhs.value.as < IfNode* > () = new IfNode(yystack_[3].value.as < AstNode* > (), yystack_[1].value.as < RootNode* > (), NULL); }
 #line 1172 "src/parser.yacc.cc"
     break;
 
   case 66: // if_statement: IF expression ':' statement ';'
-#line 286 "./src/parser.ypp"
+#line 286 "./src/parser.y"
                                                                                                 { yylhs.value.as < IfNode* > () = new IfNode(yystack_[3].value.as < AstNode* > (), yystack_[1].value.as < AstNode* > (), NULL); }
 #line 1178 "src/parser.yacc.cc"
     break;
 
   case 67: // if_statement: IF expression ':' statement ';' ELSE ':' statement ';'
-#line 287 "./src/parser.ypp"
+#line 287 "./src/parser.y"
                                                                         { yylhs.value.as < IfNode* > () = new IfNode(yystack_[7].value.as < AstNode* > (), yystack_[5].value.as < AstNode* > (), yystack_[1].value.as < AstNode* > ()); }
 #line 1184 "src/parser.yacc.cc"
     break;
 
   case 68: // if_statement: IF expression '{' block '}' ELSE '{' block '}'
-#line 288 "./src/parser.ypp"
+#line 288 "./src/parser.y"
                                                                                                 { yylhs.value.as < IfNode* > () = new IfNode(yystack_[7].value.as < AstNode* > (), yystack_[5].value.as < RootNode* > (), yystack_[1].value.as < RootNode* > ()); }
 #line 1190 "src/parser.yacc.cc"
     break;
 
   case 69: // if_statement: IF expression '{' block '}' ELSE ':' statement ';'
-#line 289 "./src/parser.ypp"
+#line 289 "./src/parser.y"
                                                                                 { yylhs.value.as < IfNode* > () = new IfNode(yystack_[7].value.as < AstNode* > (), yystack_[5].value.as < RootNode* > (), yystack_[1].value.as < AstNode* > ()); }
 #line 1196 "src/parser.yacc.cc"
     break;
 
   case 70: // if_statement: IF expression ':' statement ';' ELSE '{' block '}'
-#line 290 "./src/parser.ypp"
+#line 290 "./src/parser.y"
                                                                                 { yylhs.value.as < IfNode* > () = new IfNode(yystack_[7].value.as < AstNode* > (), yystack_[5].value.as < AstNode* > (), yystack_[1].value.as < RootNode* > ()); }
 #line 1202 "src/parser.yacc.cc"
     break;
 
   case 71: // loop_statement: WHILE expression '{' block '}'
-#line 295 "./src/parser.ypp"
+#line 295 "./src/parser.y"
                                        { yylhs.value.as < AstNode* > () = new LoopNode(yystack_[3].value.as < AstNode* > (), yystack_[1].value.as < RootNode* > ()); }
 #line 1208 "src/parser.yacc.cc"
     break;
 
   case 72: // loop_statement: FOR expression ':' expression ':' expression '{' block '}'
-#line 296 "./src/parser.ypp"
+#line 296 "./src/parser.y"
                                                                      {
 			yylhs.value.as < AstNode* > () = new ForNode(yystack_[7].value.as < AstNode* > (), yystack_[5].value.as < AstNode* > (), yystack_[3].value.as < AstNode* > (), yystack_[1].value.as < RootNode* > ());
 	}
@@ -1761,11 +1761,11 @@ namespace yy {
 #endif // YYDEBUG
 
 
-#line 11 "./src/parser.ypp"
+#line 11 "./src/parser.y"
 } // yy
 #line 1767 "src/parser.yacc.cc"
 
-#line 302 "./src/parser.ypp"
+#line 302 "./src/parser.y"
 
 
 

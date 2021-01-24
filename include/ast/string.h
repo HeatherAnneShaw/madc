@@ -8,7 +8,6 @@
 #ifndef __ast_string_h__
 #define __ast_string_h__ 1
 
-#include <string>
 #include <ast/value.h>
 
 

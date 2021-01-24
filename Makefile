@@ -37,8 +37,8 @@ main: parser
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/$@.cc -o $(OBJDIR)/$@.o
 
 parser: ast errors
-	reflex $(FLEXFLAGS) --header-file=$(INCLUDE)/$@.lex.h -o $(SRCDIR)/$@.lex.cc $(SRCDIR)/$@.ll
-	bison ${BISONFLAGS} --defines=$(INCLUDE)/$@.yacc.h -o $(SRCDIR)/$@.yacc.cc $(SRCDIR)/$@.ypp
+	reflex $(FLEXFLAGS) --header-file=$(INCLUDE)/$@.lex.h -o $(SRCDIR)/$@.lex.cc $(SRCDIR)/$@.l
+	bison ${BISONFLAGS} --defines=$(INCLUDE)/$@.yacc.h -o $(SRCDIR)/$@.yacc.cc $(SRCDIR)/$@.y
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/$@.yacc.cc -o $(OBJDIR)/$@.yacc.o
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/$@.lex.cc -o $(OBJDIR)/$@.lex.o
 

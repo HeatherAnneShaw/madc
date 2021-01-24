@@ -61,7 +61,7 @@ for i=5:i>0:i=i-1 {
 
 print type true;
 
-/*
+
 // lists (you can put ANYTHING in there, including functions)
 a = [1,2,3,"a","b"+"c"];
 print a;
@@ -78,7 +78,7 @@ print ["b"] == ["a"];
 print ["a",42,"b",42,"c"] - 42;
 //print a[3];  // "a"
 //print a[-1]; // "bc"
-*/
+
 
 /*
 // string arithmatic

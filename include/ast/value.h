@@ -10,6 +10,7 @@
 
 
 #include <ast/ast.h>
+#include <string>
 
 enum Operation {
 	LAND, LOR, LEQ, LNEQ, LTEQ, GTEQ, LT, GT,
