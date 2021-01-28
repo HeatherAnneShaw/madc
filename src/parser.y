@@ -140,7 +140,7 @@
 
 // root of AST, things actually get to run here
 run:
-	block									{ if($1) $1->walk(); }
+	block									{ if($1) $1->walk(); delete $1;}
 	;
 
 // things attach to a block node, which is the root

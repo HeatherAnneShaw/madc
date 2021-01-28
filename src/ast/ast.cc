@@ -17,8 +17,9 @@ RootNode* current_scope = NULL;
 AstNode::AstNode() {
 	debug("Constructor for AstNode called");
 	this->linenumber = line_number;
-  this->colnumber = col_number;
+	this->colnumber = col_number;
 }
+
 AstNode::~AstNode() {
 	debug("destructor for AstNode called");
 }
@@ -31,30 +32,36 @@ AstNode* AstNode::walk() {
 
 RootNode::RootNode() {
 	debug("Constructor for RootNode called");
-  this->type = nodeType_root;
-  this->root_type = rootType_root;
-  this->state_start = NULL;
-  this->state_end = NULL;
-  
-  this->symbol_table = new std::map<std::string, ValueNode*>;
-  this->value_table = new std::list<ValueNode*>({});
-  
-  if (current_scope == NULL)
-  	current_scope = this;
-  if (tree_root == NULL)
-  	tree_root = this;
+	this->type = nodeType_root;
+	this->root_type = rootType_root;
+	this->state_start = NULL;
+	this->state_end = NULL;
+	
+	this->symbol_table = new std::map<std::string, ValueNode*>;
+	this->value_table = new std::list<ValueNode*>({});
+	
+	if (current_scope == NULL)
+		current_scope = this;
+	if (tree_root == NULL)
+		tree_root = this;
 }
+
 RootNode::~RootNode() {
 	debug("Destructor for RootNode called");
+	// free values !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	delete this->symbol_table;
-  delete this->value_table;
-  StatementNode* e = this->state_start;
-  StatementNode* n;
-  while (e != NULL) {
-  	n = e->right;
-  	delete e;
-  	e = n;
-  }
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
+	free_value_walk(this->value_table);
+	delete this->value_table;
+	
+	StatementNode* e = this->state_start;
+	StatementNode* n;
+	while (e != NULL) {
+		n = e->right;
+		delete e;
+		e = n;
+	}
 }
 
 AstNode* RootNode::walk() {
@@ -102,6 +109,17 @@ RootNode* RootNode::attach_statement(AstNode* next) {
 	}
 	return this;
 }
+
+StatementNode::StatementNode() {
+	debug("Constructor for StatementNode called");
+	this->linenumber = line_number;
+	this->colnumber = col_number;
+}
+
+StatementNode::~StatementNode() {
+	debug("destructor for StatementNode called");
+}
+
 
 AstNode* StatementNode::walk() {
 	debug("statement walk called");

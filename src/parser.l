@@ -45,11 +45,11 @@
 	bool end_of_file()
 	{
 		if (depth == 0)
-			return true;		// return true: no more input to read
-		fclose(in());			// close the file descriptor
+			return true;	// return true: no more input to read
+		fclose(in());		// close the file descriptor
 		pop_matcher();		// delete current matcher, pop matcher
 		depth--;
-		return false;			// return false: continue reading
+		return false;		// return false: continue reading
 	}
 }
 %init{
@@ -83,10 +83,10 @@
 }
 
 
-("//"|"#").*			// ignore comments
+("//"|"#").*		// ignore comments
 "/*"(.|\n)*?"*/"	// ignore multiline comments
 "''"(.|\n)*?"''"	// ignore documentation comments
-[ \t\r\n]					// ignore whitespace
+[ \t\r\n]			// ignore whitespace
 
 
 
@@ -105,34 +105,34 @@
 }
 
 
-(not)|"!" 				{ LC_UPDATE; return yy::parser::make_NOT(); }
+(not)|"!" 			{ LC_UPDATE; return yy::parser::make_NOT(); }
 
-(exit)			 			{ LC_UPDATE; return yy::parser::make_EXIT(); }
-(print)						{ LC_UPDATE; return yy::parser::make_PRINT(); }
-(type)						{ LC_UPDATE; return yy::parser::make_TYPE(); }
+(exit)			 	{ LC_UPDATE; return yy::parser::make_EXIT(); }
+(print)				{ LC_UPDATE; return yy::parser::make_PRINT(); }
+(type)				{ LC_UPDATE; return yy::parser::make_TYPE(); }
 
-(none)						{ LC_UPDATE; return yy::parser::make_TYPE_NONE(); }
-(float)						{ LC_UPDATE; return yy::parser::make_TYPE_FLOAT(); }
-(int)							{ LC_UPDATE; return yy::parser::make_TYPE_INT(); }
-(str)							{ LC_UPDATE; return yy::parser::make_TYPE_STRING(); }
-(truth)						{ LC_UPDATE; return yy::parser::make_TYPE_TRUTH(); }
-(list)						{ LC_UPDATE; return yy::parser::make_TYPE_LIST(); }
-(true)						{ LC_UPDATE; return yy::parser::make_TRUE(); }
-(false)						{ LC_UPDATE; return yy::parser::make_FALSE(); }
+(none)				{ LC_UPDATE; return yy::parser::make_TYPE_NONE(); }
+(float)				{ LC_UPDATE; return yy::parser::make_TYPE_FLOAT(); }
+(int)				{ LC_UPDATE; return yy::parser::make_TYPE_INT(); }
+(str)				{ LC_UPDATE; return yy::parser::make_TYPE_STRING(); }
+(truth)				{ LC_UPDATE; return yy::parser::make_TYPE_TRUTH(); }
+(list)				{ LC_UPDATE; return yy::parser::make_TYPE_LIST(); }
+(true)				{ LC_UPDATE; return yy::parser::make_TRUE(); }
+(false)				{ LC_UPDATE; return yy::parser::make_FALSE(); }
 
 ("->")|(return)		{ LC_UPDATE; return yy::parser::make_RETURNS(); }
-("?")|(if)				{ LC_UPDATE; return yy::parser::make_IF(); }
-(else)						{ LC_UPDATE; return yy::parser::make_ELSE(); }
-(while)						{ LC_UPDATE; return yy::parser::make_WHILE(); }
-(for)							{ LC_UPDATE; return yy::parser::make_FOR(); }
-(and)|"&&"				{ LC_UPDATE; return yy::parser::make_LAND(); }
-(or)|"||"					{ LC_UPDATE; return yy::parser::make_LOR(); }
+("?")|(if)			{ LC_UPDATE; return yy::parser::make_IF(); }
+(else)				{ LC_UPDATE; return yy::parser::make_ELSE(); }
+(while)				{ LC_UPDATE; return yy::parser::make_WHILE(); }
+(for)				{ LC_UPDATE; return yy::parser::make_FOR(); }
+(and)|"&&"			{ LC_UPDATE; return yy::parser::make_LAND(); }
+(or)|"||"			{ LC_UPDATE; return yy::parser::make_LOR(); }
 ((is)[ ]+)|"=="		{ LC_UPDATE; return yy::parser::make_LEQ(); }
 ((is)[ ]+(not))|(isnt)|"!="	{ LC_UPDATE; return yy::parser::make_LNEQ();}
 
-[0-9]+											{ LC_UPDATE; return yy::parser::make_INT(atoi(text())); }
-[0-9]+\.[0-9]+							{ LC_UPDATE; return yy::parser::make_FLOAT(atof(text())); }
-0(x|X)[0-9a-fA-F]+				 	{ LC_UPDATE; return yy::parser::make_INT(atof(text())); }
+[0-9]+						{ LC_UPDATE; return yy::parser::make_INT(atoi(text())); }
+[0-9]+\.[0-9]+				{ LC_UPDATE; return yy::parser::make_FLOAT(atof(text())); }
+0(x|X)[0-9a-fA-F]+			{ LC_UPDATE; return yy::parser::make_INT(atof(text())); }
 
 [a-zA-Z_]([a-zA-Z_]|[0-9])* { LC_UPDATE; return yy::parser::make_VAR(str()); }
 

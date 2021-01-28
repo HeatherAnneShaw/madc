@@ -781,7 +781,7 @@ namespace yy {
             {
   case 2: // run: block
 #line 143 "./src/parser.y"
-                                                                                { if(yystack_[0].value.as < RootNode* > ()) yystack_[0].value.as < RootNode* > ()->walk(); }
+                                                                                { if(yystack_[0].value.as < RootNode* > ()) yystack_[0].value.as < RootNode* > ()->walk(); delete yystack_[0].value.as < RootNode* > ();}
 #line 786 "src/parser.yacc.cc"
     break;
 

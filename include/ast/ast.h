@@ -53,6 +53,9 @@ class StatementNode: public AstNode {
 		AstNode* left;	// this is where the instruction branch is
 		StatementNode* right;	// this is where the next statement is
 		
+		StatementNode();
+		~StatementNode();
+		
 		AstNode* walk();
 };
 
@@ -60,8 +63,8 @@ class StatementNode: public AstNode {
 
 class RootNode: public AstNode {
 	public:
-		RootType root_type;					// defined by the creator of the node
-		StatementNode* state_start;	// the begining of the statement list
+		RootType root_type;				// defined by the creator of the node
+		StatementNode* state_start;		// the begining of the statement list
 		StatementNode* state_end;		// the end of our statement list
 		std::map<std::string, ValueNode*>* symbol_table; // scope level variables
 		std::list<ValueNode*>* value_table;	// values created stored for garbage collection

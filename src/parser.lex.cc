@@ -94,11 +94,11 @@ class Lexer : public reflex::AbstractLexer<reflex::Matcher> {
 	bool end_of_file()
 	{
 		if (depth == 0)
-			return true;		// return true: no more input to read
-		fclose(in());			// close the file descriptor
+			return true;	// return true: no more input to read
+		fclose(in());		// close the file descriptor
 		pop_matcher();		// delete current matcher, pop matcher
 		depth--;
-		return false;			// return false: continue reading
+		return false;		// return false: continue reading
 	}
 
  public:

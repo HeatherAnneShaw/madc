@@ -16,7 +16,7 @@ extern int col_number;
 
 #define MAX_INCLUDE_DEPTH 99
 
-// if you want debugging set this to true
-#define __debug__ false
+// if you want debugging set this to true, or change in makefile...
+//#define __debug__ false
 
 #endif

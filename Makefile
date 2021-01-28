@@ -2,9 +2,9 @@
 INCLUDE		:= ./include
 SRCDIR		:= ./src
 OBJDIR		:= ./obj
-BUILD			:= ./build
+BUILD		:= ./build
 
-OBJ				:= $(addprefix $(OBJDIR)/, \
+OBJ			:= $(addprefix $(OBJDIR)/, \
 							main.o \
 							ast.o \
 							ast_value.o \
@@ -24,11 +24,11 @@ OBJ				:= $(addprefix $(OBJDIR)/, \
 							)
 LIBS 		:= -lreflex
 APPNAME		:= madc
-
+DEBUG_FLAGS := -D__debug__=true
 CXX 		:= g++
-CXXFLAGS	:= -I$(INCLUDE) -std=c++17 -pedantic-errors -Wall -Wextra -Werror
+CXXFLAGS	:= -I$(INCLUDE) -std=c++17 -pedantic-errors -Wall -Wextra -Werror $(DEBUG_FLAGS)
 #FLEXFLAGS  := -d -p
-BISONFLAGS := -Wcounterexamples -v
+BISONFLAGS	:= -Wcounterexamples -v
 
 all: main parser ast errors builtins math
 	$(CXX) $(CXXFLAGS) -o $(BUILD)/$(APPNAME) $(OBJ) $(LIBS)
@@ -72,5 +72,6 @@ test:
 	done
 
 clean:
-	rm -f $(BUILD)/* $(OBJDIR)/*
+	rm -f $(BUILD)/* $(OBJDIR)/* $(SRCDIR)/parser.yacc.cc $(SRCDIR)/parser.lex.cc
+
 
