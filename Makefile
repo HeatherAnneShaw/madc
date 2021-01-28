@@ -22,10 +22,10 @@ OBJ				:= $(addprefix $(OBJDIR)/, \
 							parser.lex.o \
 							parser.yacc.o \
 							)
-LIBS 			:= -lreflex
-APPNAME		:= parser
+LIBS 		:= -lreflex
+APPNAME		:= madc
 
-CXX 			:= g++
+CXX 		:= g++
 CXXFLAGS	:= -I$(INCLUDE) -std=c++17 -pedantic-errors -Wall -Wextra -Werror
 #FLEXFLAGS  := -d -p
 BISONFLAGS := -Wcounterexamples -v
@@ -64,6 +64,12 @@ builtins:
 math:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/$@/math.cc -o $(OBJDIR)/math.o
 
+test:
+	@echo "Running tests..."
+	@for f in ./tests/*.mc; do \
+	    echo "\n************  $$f  ************\n"; \
+		$(BUILD)/$(APPNAME) $$f; \
+	done
 
 clean:
 	rm -f $(BUILD)/* $(OBJDIR)/*

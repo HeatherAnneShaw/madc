@@ -210,36 +210,37 @@ list_expression:
 	}
 	;
 
-expression:											{;} // ignore empty expressions
-	| INT													{ $$ = new IntNode($1); }
-	| TRUTH												{ $$ = new TruthNode($1); }
-	| FLOAT												{ $$ = new FloatNode($1); }
-	| STRING											{ $$ = new StringNode($1); }
-	| TYPE_NONE										{ $$ = new NoneNode(); }
-	| VAR '=' expression					{ $$ = new AssignmentNode($1, $3); }
-	| VAR													{ $$ = new SymbolReference($1); }
-	| list_expression							{ $$ = $1; }
-	| TYPE expression 						{ $$ = new BuiltinNode(TYPE, $2); }
-	| NOT expression %prec NEG		{ $$ = new MathNode(BNOT, NULL, $2); }
-	| '(' expression ')' 					{ $$ = $2; }
-	| expression '+' expression		{ $$ = new MathNode(ADD, $1, $3); }
-	| expression '-' expression		{ $$ = new MathNode(SUB, $1, $3); }
-	| expression '*' expression		{ $$ = new MathNode(MUL, $1, $3); }
-	| expression '/' expression		{ $$ = new MathNode(DIV, $1, $3); }
-	| expression '%' expression		{ $$ = new MathNode(MOD, $1, $3); }
-	| expression POW expression		{ $$ = new MathNode(POW, $1, $3); }
-	| expression '&' expression		{ $$ = new MathNode(BAND, $1, $3); }
-	| expression '|' expression		{ $$ = new MathNode(BOR, $1, $3); }
-	| expression '^' expression		{ $$ = new MathNode(BXOR, $1, $3); }
-	| expression LEQ expression		{ $$ = new MathNode(LEQ, $1, $3); }
-	| expression LNEQ expression	{ $$ = new MathNode(LNEQ, $1, $3); }
-	| expression LAND expression	{ $$ = new MathNode(LAND, $1, $3); }
-	| expression LOR expression		{ $$ = new MathNode(LOR, $1, $3); }
-	| expression '<' expression		{ $$ = new MathNode(LT, $1, $3); }
-	| expression '>' expression		{ $$ = new MathNode(GT, $1, $3); }
-	| expression LTEQ expression	{ $$ = new MathNode(LTEQ, $1, $3); }
-	| expression GTEQ expression	{ $$ = new MathNode(GTEQ, $1, $3); }
-	| function_expression					{ $$ = $1; }
+expression:							{;} // ignore empty expressions
+	| INT							{ $$ = new IntNode($1); }
+	| TRUTH							{ $$ = new TruthNode($1); }
+	| FLOAT							{ $$ = new FloatNode($1); }
+	| STRING						{ $$ = new StringNode($1); }
+	| TYPE_NONE						{ $$ = new NoneNode(); }
+	| type_statement VAR '=' expression	{ $$ = new AssignmentNode($1, $2, $4); }
+	| VAR								{ $$ = new SymbolReference($1); }
+////////////////////////////////////////////////////////////////////////////////
+	| list_expression					{ $$ = $1; }
+	| TYPE expression 					{ $$ = new BuiltinNode(TYPE, $2); }
+	| NOT expression %prec NEG			{ $$ = new MathNode(BNOT, NULL, $2); }
+	| '(' expression ')' 				{ $$ = $2; }
+	| expression '+' expression			{ $$ = new MathNode(ADD, $1, $3); }
+	| expression '-' expression			{ $$ = new MathNode(SUB, $1, $3); }
+	| expression '*' expression			{ $$ = new MathNode(MUL, $1, $3); }
+	| expression '/' expression			{ $$ = new MathNode(DIV, $1, $3); }
+	| expression '%' expression			{ $$ = new MathNode(MOD, $1, $3); }
+	| expression POW expression			{ $$ = new MathNode(POW, $1, $3); }
+	| expression '&' expression			{ $$ = new MathNode(BAND, $1, $3); }
+	| expression '|' expression			{ $$ = new MathNode(BOR, $1, $3); }
+	| expression '^' expression			{ $$ = new MathNode(BXOR, $1, $3); }
+	| expression LEQ expression			{ $$ = new MathNode(LEQ, $1, $3); }
+	| expression LNEQ expression		{ $$ = new MathNode(LNEQ, $1, $3); }
+	| expression LAND expression		{ $$ = new MathNode(LAND, $1, $3); }
+	| expression LOR expression			{ $$ = new MathNode(LOR, $1, $3); }
+	| expression '<' expression			{ $$ = new MathNode(LT, $1, $3); }
+	| expression '>' expression			{ $$ = new MathNode(GT, $1, $3); }
+	| expression LTEQ expression		{ $$ = new MathNode(LTEQ, $1, $3); }
+	| expression GTEQ expression		{ $$ = new MathNode(GTEQ, $1, $3); }
+	| function_expression				{ $$ = $1; }
 	| IF expression ':' expression ':' expression { $$ = new IfNode($2, $4, $6); }
 /*	| VAR	ADDADD									{ $$ = ast_add_math_eq_operation(ADDADD, $1, NULL); }
 	| VAR SUBSUB									{ $$ = ast_add_math_eq_operation(SUBSUB, $1, NULL); }

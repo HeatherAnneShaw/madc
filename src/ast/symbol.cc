@@ -9,20 +9,9 @@
 #include <errors/errors.h>
 
 
-
-SymbolReference::SymbolReference (std::string name) {
-	debug("symbol reference constructor");
-	this->name = new std::string(name);
-}
-
-SymbolReference::~SymbolReference (void) {
-	debug("symbol reference destructor");
-	delete this->name;
-}
-
-
-AssignmentNode::AssignmentNode (std::string name, AstNode* resolve_tree) {
+AssignmentNode::AssignmentNode (Type vtype, std::string name, AstNode* resolve_tree) {
 	debug("assignment constructor");
+  this->vtype = vtype;
   this->name = new std::string(name);
   this->resolve_tree = resolve_tree;
 }
@@ -42,11 +31,27 @@ AstNode* AssignmentNode::walk (void) {
 		return NULL;
 	}
 	
+	if (value->vtype != this->vtype) {
+		runtime_error("Wrong type", this);
+		return NULL;
+	}
+	
 	if (current_scope->symbol_table->count(*this->name) == 0)
 		current_scope->symbol_table->insert({*this->name, value});
 	else
 		current_scope->symbol_table->at(*this->name) = value;
 	return value;
+}
+
+
+SymbolReference::SymbolReference (std::string name) {
+	debug("symbol reference constructor");
+	this->name = new std::string(name);
+}
+
+SymbolReference::~SymbolReference (void) {
+	debug("symbol reference destructor");
+	delete this->name;
 }
 
 AstNode* SymbolReference::walk (void) {

@@ -20,7 +20,7 @@ FunctionNode::FunctionNode (std::string name, std::list<std::tuple<std::string, 
   this->function_branch = function_branch;
   this->recursion = 0;
 
-  AstNode* ass = new AssignmentNode(name, this);
+  AstNode* ass = new AssignmentNode(FUNCTION, name, this);
 
   current_scope->attach_statement (ass);
   if (function_branch->type == nodeType_root)

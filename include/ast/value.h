@@ -36,7 +36,7 @@ std::string ast_type_to_string(Type type);
 // type nodes are based on this node type
 class ValueNode: public AstNode {
 	public:
-	  int vtype;
+	  Type vtype;
 	  ValueNode (void);
 	  virtual ~ValueNode (void);
 	  virtual ValueNode* walk (void);

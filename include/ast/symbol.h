@@ -12,6 +12,7 @@
 
 class SymbolReference: public AstNode {
 	public:
+		Type type;
 		std::string* name;
 		
 		SymbolReference (std::string name);
@@ -21,10 +22,11 @@ class SymbolReference: public AstNode {
 
 class AssignmentNode: public AstNode {
 	public:
+		Type vtype;
 		std::string* name;
 		AstNode* resolve_tree;
 		
-		AssignmentNode (std::string name, AstNode* resolve_tree);
+		AssignmentNode (Type vtype, std::string name, AstNode* resolve_tree);
 		~AssignmentNode (void);
 		AstNode* walk(void);
 };

@@ -11,13 +11,13 @@
 
 
 std::map<Type, std::string> TypeMap = {
-	{NONE,			"none"},
-	{TRUTH,			"truth"},
-	{INT,				"int"},
-	{FLOAT,			"float"},
-	{STRING,		"string"},
+	{NONE,		"none"},
+	{TRUTH,		"truth"},
+	{INT,		"int"},
+	{FLOAT,		"float"},
+	{STRING,	"string"},
 	{FUNCTION,	"function"},
-	{LIST,			"list"}
+	{LIST,		"list"}
 };
 
 std::string ast_type_to_string(Type type) {
@@ -32,8 +32,8 @@ std::map<Operation, std::string> OpMap = {
 	{LNEQ, 	"!="},
 	{LTEQ, 	"<="},
 	{GTEQ, 	">="},
-	{LT, 		"<"},
-	{GT, 		">"},
+	{LT, 	"<"},
+	{GT, 	">"},
 	
 	{BAND, 	"&"},
 	{BOR, 	"|"},

@@ -57,7 +57,7 @@ Grammar
    26           | FLOAT
    27           | STRING
    28           | TYPE_NONE
-   29           | VAR '=' expression
+   29           | type_statement VAR '=' expression
    30           | VAR
    31           | list_expression
    32           | TYPE expression
@@ -191,7 +191,7 @@ Nonterminals, with rules where they appear
         on right: 1 3 4 5 6 57 60 61 64 67 68 69 70 71
     type_statement <Type> (72)
         on left: 7 8 9 10 11 12
-        on right: 55 56 57 58 59 60
+        on right: 29 55 56 57 58 59 60
     statement <AstNode*> (73)
         on left: 13 14 15 16
         on right: 3 65 66 68 69
@@ -249,35 +249,41 @@ State 2
     5      | block • loop_statement
     6      | block • function_statement
 
-    RETURNS    shift, and go to state 4
-    EXIT       shift, and go to state 5
-    PRINT      shift, and go to state 6
-    IF         shift, and go to state 7
-    WHILE      shift, and go to state 8
-    FOR        shift, and go to state 9
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 17
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    RETURNS      shift, and go to state 4
+    EXIT         shift, and go to state 5
+    PRINT        shift, and go to state 6
+    IF           shift, and go to state 7
+    WHILE        shift, and go to state 8
+    FOR          shift, and go to state 9
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 22
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $end      reduce using rule 1 (run)
     $default  reduce using rule 23 (expression)
 
-    statement            go to state 21
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 24
-    function_statement   go to state 25
-    function_expression  go to state 26
-    if_statement         go to state 27
-    loop_statement       go to state 28
+    type_statement       go to state 26
+    statement            go to state 27
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 30
+    function_statement   go to state 31
+    function_expression  go to state 32
+    if_statement         go to state 33
+    loop_statement       go to state 34
 
 
 State 3
@@ -291,75 +297,93 @@ State 4
 
    16 statement: RETURNS • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 31
-    function_expression  go to state 26
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 37
+    function_expression  go to state 32
 
 
 State 5
 
    15 statement: EXIT • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 32
-    function_expression  go to state 26
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 38
+    function_expression  go to state 32
 
 
 State 6
 
    14 statement: PRINT • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 33
-    function_expression  go to state 26
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 39
+    function_expression  go to state 32
 
 
 State 7
@@ -372,75 +396,93 @@ State 7
    68             | IF • expression '{' block '}' ELSE ':' statement ';'
    69             | IF • expression ':' statement ';' ELSE '{' block '}'
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 34
-    function_expression  go to state 26
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 40
+    function_expression  go to state 32
 
 
 State 8
 
    70 loop_statement: WHILE • expression '{' block '}'
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 35
-    function_expression  go to state 26
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 41
+    function_expression  go to state 32
 
 
 State 9
 
    71 loop_statement: FOR • expression ':' expression ':' expression '{' block '}'
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 36
-    function_expression  go to state 26
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 42
+    function_expression  go to state 32
 
 
 State 10
@@ -459,61 +501,103 @@ State 11
 
 State 12
 
-   28 expression: TYPE_NONE •
+    8 type_statement: TYPE_INT •
 
-    $default  reduce using rule 28 (expression)
+    $default  reduce using rule 8 (type_statement)
 
 
 State 13
 
-   32 expression: TYPE • expression
+    9 type_statement: TYPE_FLOAT •
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
-
-    $default  reduce using rule 23 (expression)
-
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 37
-    function_expression  go to state 26
+    $default  reduce using rule 9 (type_statement)
 
 
 State 14
+
+   10 type_statement: TYPE_STRING •
+
+    $default  reduce using rule 10 (type_statement)
+
+
+State 15
+
+    7 type_statement: TYPE_NONE •
+   28 expression: TYPE_NONE •
+
+    VAR       reduce using rule 7 (type_statement)
+    $default  reduce using rule 28 (expression)
+
+
+State 16
+
+   11 type_statement: TYPE_TRUTH •
+
+    $default  reduce using rule 11 (type_statement)
+
+
+State 17
+
+   12 type_statement: TYPE_LIST •
+
+    $default  reduce using rule 12 (type_statement)
+
+
+State 18
+
+   32 expression: TYPE • expression
+
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
+
+    $default  reduce using rule 23 (expression)
+
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 43
+    function_expression  go to state 32
+
+
+State 19
 
    24 expression: INT •
 
     $default  reduce using rule 24 (expression)
 
 
-State 15
+State 20
 
    26 expression: FLOAT •
 
     $default  reduce using rule 26 (expression)
 
 
-State 16
+State 21
 
    27 expression: STRING •
 
     $default  reduce using rule 27 (expression)
 
 
-State 17
+State 22
 
-   29 expression: VAR • '=' expression
-   30           | VAR •
+   30 expression: VAR •
    57 function_statement: VAR • type_statement '{' block '}'
    58                   | VAR • type_statement ':' expression ';'
    59                   | VAR • input_list ':' type_statement ':' expression ';'
@@ -522,13 +606,12 @@ State 17
    62 function_expression: VAR • '(' expression_list ')'
    63                    | VAR • '(' expression ')'
 
-    TYPE_INT     shift, and go to state 38
-    TYPE_FLOAT   shift, and go to state 39
-    TYPE_STRING  shift, and go to state 40
-    TYPE_NONE    shift, and go to state 41
-    TYPE_TRUTH   shift, and go to state 42
-    TYPE_LIST    shift, and go to state 43
-    '='          shift, and go to state 44
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 44
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
     '('          shift, and go to state 45
 
     ','       reduce using rule 54 (input_list)
@@ -540,105 +623,130 @@ State 17
     input_list      go to state 47
 
 
-State 18
+State 23
 
    34 expression: '(' • expression ')'
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 48
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
-State 19
+State 24
 
    33 expression: NOT • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 49
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
-State 20
+State 25
 
    21 list_expression: '[' • expression_list ']'
    22                | '[' • expression ']'
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
+    type_statement       go to state 26
+    TRUTH                go to state 28
     expression_list      go to state 50
-    list_expression      go to state 23
+    list_expression      go to state 29
     expression           go to state 51
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
-State 21
+State 26
+
+   29 expression: type_statement • VAR '=' expression
+
+    VAR  shift, and go to state 52
+
+
+State 27
 
     3 block: block statement • ';'
 
-    ';'  shift, and go to state 52
+    ';'  shift, and go to state 53
 
 
-State 22
+State 28
 
    25 expression: TRUTH •
 
     $default  reduce using rule 25 (expression)
 
 
-State 23
+State 29
 
    31 expression: list_expression •
 
     $default  reduce using rule 31 (expression)
 
 
-State 24
+State 30
 
    13 statement: expression •
    35 expression: expression • '+' expression
@@ -659,94 +767,98 @@ State 24
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
 
     $default  reduce using rule 13 (statement)
 
 
-State 25
+State 31
 
     6 block: block function_statement •
 
     $default  reduce using rule 6 (block)
 
 
-State 26
+State 32
 
    52 expression: function_expression •
 
     $default  reduce using rule 52 (expression)
 
 
-State 27
+State 33
 
     4 block: block if_statement •
 
     $default  reduce using rule 4 (block)
 
 
-State 28
+State 34
 
     5 block: block loop_statement •
 
     $default  reduce using rule 5 (block)
 
 
-State 29
+State 35
 
    53 expression: IF • expression ':' expression ':' expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 70
-    function_expression  go to state 26
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 71
+    function_expression  go to state 32
 
 
-State 30
+State 36
 
-   29 expression: VAR • '=' expression
-   30           | VAR •
+   30 expression: VAR •
    62 function_expression: VAR • '(' expression_list ')'
    63                    | VAR • '(' expression ')'
 
-    '='  shift, and go to state 44
     '('  shift, and go to state 45
 
     $default  reduce using rule 30 (expression)
 
 
-State 31
+State 37
 
    16 statement: RETURNS expression •
    35 expression: expression • '+' expression
@@ -767,28 +879,28 @@ State 31
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
 
     $default  reduce using rule 16 (statement)
 
 
-State 32
+State 38
 
    15 statement: EXIT expression •
    35 expression: expression • '+' expression
@@ -809,28 +921,28 @@ State 32
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
 
     $default  reduce using rule 15 (statement)
 
 
-State 33
+State 39
 
    14 statement: PRINT expression •
    35 expression: expression • '+' expression
@@ -851,28 +963,28 @@ State 33
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
 
     $default  reduce using rule 14 (statement)
 
 
-State 34
+State 40
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -899,28 +1011,28 @@ State 34
    68             | IF expression • '{' block '}' ELSE ':' statement ';'
    69             | IF expression • ':' statement ';' ELSE '{' block '}'
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
-    ':'   shift, and go to state 71
-    '{'   shift, and go to state 72
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
+    ':'   shift, and go to state 72
+    '{'   shift, and go to state 73
 
 
-State 35
+State 41
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -941,27 +1053,27 @@ State 35
    51           | expression • GTEQ expression
    70 loop_statement: WHILE expression • '{' block '}'
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
-    '{'   shift, and go to state 73
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
+    '{'   shift, and go to state 74
 
 
-State 36
+State 42
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -982,27 +1094,27 @@ State 36
    51           | expression • GTEQ expression
    71 loop_statement: FOR expression • ':' expression ':' expression '{' block '}'
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
-    ':'   shift, and go to state 74
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
+    ':'   shift, and go to state 75
 
 
-State 37
+State 43
 
    32 expression: TYPE expression •
    35           | expression • '+' expression
@@ -1026,71 +1138,11 @@ State 37
     $default  reduce using rule 32 (expression)
 
 
-State 38
-
-    8 type_statement: TYPE_INT •
-
-    $default  reduce using rule 8 (type_statement)
-
-
-State 39
-
-    9 type_statement: TYPE_FLOAT •
-
-    $default  reduce using rule 9 (type_statement)
-
-
-State 40
-
-   10 type_statement: TYPE_STRING •
-
-    $default  reduce using rule 10 (type_statement)
-
-
-State 41
+State 44
 
     7 type_statement: TYPE_NONE •
 
     $default  reduce using rule 7 (type_statement)
-
-
-State 42
-
-   11 type_statement: TYPE_TRUTH •
-
-    $default  reduce using rule 11 (type_statement)
-
-
-State 43
-
-   12 type_statement: TYPE_LIST •
-
-    $default  reduce using rule 12 (type_statement)
-
-
-State 44
-
-   29 expression: VAR '=' • expression
-
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
-
-    $default  reduce using rule 23 (expression)
-
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 75
-    function_expression  go to state 26
 
 
 State 45
@@ -1098,26 +1150,32 @@ State 45
    62 function_expression: VAR '(' • expression_list ')'
    63                    | VAR '(' • expression ')'
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
+    type_statement       go to state 26
+    TRUTH                go to state 28
     expression_list      go to state 76
-    list_expression      go to state 23
+    list_expression      go to state 29
     expression           go to state 77
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 46
@@ -1164,23 +1222,23 @@ State 48
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
     ')'   shift, and go to state 84
 
 
@@ -1239,460 +1297,569 @@ State 51
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
     ','   shift, and go to state 87
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
     ']'   shift, and go to state 88
 
 
 State 52
+
+   29 expression: type_statement VAR • '=' expression
+
+    '='  shift, and go to state 89
+
+
+State 53
 
     3 block: block statement ';' •
 
     $default  reduce using rule 3 (block)
 
 
-State 53
+State 54
 
    46 expression: expression LAND • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 89
-    function_expression  go to state 26
-
-
-State 54
-
-   47 expression: expression LOR • expression
-
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
-
-    $default  reduce using rule 23 (expression)
-
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 90
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 55
 
-   44 expression: expression LEQ • expression
+   47 expression: expression LOR • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 91
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 56
 
-   45 expression: expression LNEQ • expression
+   44 expression: expression LEQ • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 92
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 57
 
-   50 expression: expression LTEQ • expression
+   45 expression: expression LNEQ • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 93
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 58
 
-   51 expression: expression GTEQ • expression
+   50 expression: expression LTEQ • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 94
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 59
 
-   40 expression: expression POW • expression
+   51 expression: expression GTEQ • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 95
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 60
 
-   48 expression: expression '<' • expression
+   40 expression: expression POW • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 96
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 61
 
-   49 expression: expression '>' • expression
+   48 expression: expression '<' • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 97
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 62
 
-   41 expression: expression '&' • expression
+   49 expression: expression '>' • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 98
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 63
 
-   42 expression: expression '|' • expression
+   41 expression: expression '&' • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 99
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 64
 
-   43 expression: expression '^' • expression
+   42 expression: expression '|' • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 100
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 65
 
-   35 expression: expression '+' • expression
+   43 expression: expression '^' • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 101
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 66
 
-   36 expression: expression '-' • expression
+   35 expression: expression '+' • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 102
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 67
 
-   37 expression: expression '*' • expression
+   36 expression: expression '-' • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 103
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 68
 
-   38 expression: expression '/' • expression
+   37 expression: expression '*' • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 104
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 69
 
-   39 expression: expression '%' • expression
+   38 expression: expression '/' • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
     expression           go to state 105
-    function_expression  go to state 26
+    function_expression  go to state 32
 
 
 State 70
+
+   39 expression: expression '%' • expression
+
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
+
+    $default  reduce using rule 23 (expression)
+
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 106
+    function_expression  go to state 32
+
+
+State 71
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -1713,72 +1880,69 @@ State 70
    51           | expression • GTEQ expression
    53           | IF expression • ':' expression ':' expression
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
-    ':'   shift, and go to state 106
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
+    ':'   shift, and go to state 107
 
 
-State 71
+State 72
 
    53 expression: IF expression ':' • expression ':' expression
    65 if_statement: IF expression ':' • statement ';'
    66             | IF expression ':' • statement ';' ELSE ':' statement ';'
    69             | IF expression ':' • statement ';' ELSE '{' block '}'
 
-    RETURNS    shift, and go to state 4
-    EXIT       shift, and go to state 5
-    PRINT      shift, and go to state 6
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    RETURNS      shift, and go to state 4
+    EXIT         shift, and go to state 5
+    PRINT        shift, and go to state 6
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    statement            go to state 107
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 108
-    function_expression  go to state 26
-
-
-State 72
-
-   64 if_statement: IF expression '{' • block '}'
-   67             | IF expression '{' • block '}' ELSE '{' block '}'
-   68             | IF expression '{' • block '}' ELSE ':' statement ';'
-
-    $default  reduce using rule 2 (block)
-
-    block  go to state 109
+    type_statement       go to state 26
+    statement            go to state 108
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 109
+    function_expression  go to state 32
 
 
 State 73
 
-   70 loop_statement: WHILE expression '{' • block '}'
+   64 if_statement: IF expression '{' • block '}'
+   67             | IF expression '{' • block '}' ELSE '{' block '}'
+   68             | IF expression '{' • block '}' ELSE ':' statement ';'
 
     $default  reduce using rule 2 (block)
 
@@ -1787,69 +1951,42 @@ State 73
 
 State 74
 
-   71 loop_statement: FOR expression ':' • expression ':' expression '{' block '}'
+   70 loop_statement: WHILE expression '{' • block '}'
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    $default  reduce using rule 2 (block)
 
-    $default  reduce using rule 23 (expression)
-
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 111
-    function_expression  go to state 26
+    block  go to state 111
 
 
 State 75
 
-   29 expression: VAR '=' expression •
-   35           | expression • '+' expression
-   36           | expression • '-' expression
-   37           | expression • '*' expression
-   38           | expression • '/' expression
-   39           | expression • '%' expression
-   40           | expression • POW expression
-   41           | expression • '&' expression
-   42           | expression • '|' expression
-   43           | expression • '^' expression
-   44           | expression • LEQ expression
-   45           | expression • LNEQ expression
-   46           | expression • LAND expression
-   47           | expression • LOR expression
-   48           | expression • '<' expression
-   49           | expression • '>' expression
-   50           | expression • LTEQ expression
-   51           | expression • GTEQ expression
+   71 loop_statement: FOR expression ':' • expression ':' expression '{' block '}'
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
-    $default  reduce using rule 29 (expression)
+    $default  reduce using rule 23 (expression)
+
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 112
+    function_expression  go to state 32
 
 
 State 76
@@ -1858,7 +1995,7 @@ State 76
    62 function_expression: VAR '(' expression_list • ')'
 
     ','  shift, and go to state 85
-    ')'  shift, and go to state 112
+    ')'  shift, and go to state 113
 
 
 State 77
@@ -1883,25 +2020,25 @@ State 77
    51           | expression • GTEQ expression
    63 function_expression: VAR '(' expression • ')'
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
     ','   shift, and go to state 87
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
-    ')'   shift, and go to state 113
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
+    ')'   shift, and go to state 114
 
 
 State 78
@@ -1915,25 +2052,31 @@ State 79
 
    58 function_statement: VAR type_statement ':' • expression ';'
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 114
-    function_expression  go to state 26
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 115
+    function_expression  go to state 32
 
 
 State 80
@@ -1942,21 +2085,21 @@ State 80
 
     $default  reduce using rule 2 (block)
 
-    block  go to state 115
+    block  go to state 116
 
 
 State 81
 
    56 input_list: input_list ',' • type_statement VAR
 
-    TYPE_INT     shift, and go to state 38
-    TYPE_FLOAT   shift, and go to state 39
-    TYPE_STRING  shift, and go to state 40
-    TYPE_NONE    shift, and go to state 41
-    TYPE_TRUTH   shift, and go to state 42
-    TYPE_LIST    shift, and go to state 43
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 44
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
 
-    type_statement  go to state 116
+    type_statement  go to state 117
 
 
 State 82
@@ -1964,14 +2107,14 @@ State 82
    59 function_statement: VAR input_list ':' • type_statement ':' expression ';'
    60                   | VAR input_list ':' • type_statement '{' block '}'
 
-    TYPE_INT     shift, and go to state 38
-    TYPE_FLOAT   shift, and go to state 39
-    TYPE_STRING  shift, and go to state 40
-    TYPE_NONE    shift, and go to state 41
-    TYPE_TRUTH   shift, and go to state 42
-    TYPE_LIST    shift, and go to state 43
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 44
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
 
-    type_statement  go to state 117
+    type_statement  go to state 118
 
 
 State 83
@@ -1980,7 +2123,7 @@ State 83
 
     $default  reduce using rule 2 (block)
 
-    block  go to state 118
+    block  go to state 119
 
 
 State 84
@@ -1994,25 +2137,31 @@ State 85
 
    20 expression_list: expression_list ',' • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 119
-    function_expression  go to state 26
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 120
+    function_expression  go to state 32
 
 
 State 86
@@ -2026,25 +2175,31 @@ State 87
 
    19 expression_list: expression ',' • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 120
-    function_expression  go to state 26
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 121
+    function_expression  go to state 32
 
 
 State 88
@@ -2055,6 +2210,37 @@ State 88
 
 
 State 89
+
+   29 expression: type_statement VAR '=' • expression
+
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
+
+    $default  reduce using rule 23 (expression)
+
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 122
+    function_expression  go to state 32
+
+
+State 90
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2075,26 +2261,26 @@ State 89
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
 
     $default  reduce using rule 46 (expression)
 
 
-State 90
+State 91
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2115,26 +2301,26 @@ State 90
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
 
     $default  reduce using rule 47 (expression)
 
 
-State 91
+State 92
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2155,20 +2341,20 @@ State 91
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    POW  shift, and go to state 59
-    '&'  shift, and go to state 62
-    '|'  shift, and go to state 63
-    '^'  shift, and go to state 64
-    '+'  shift, and go to state 65
-    '-'  shift, and go to state 66
-    '*'  shift, and go to state 67
-    '/'  shift, and go to state 68
-    '%'  shift, and go to state 69
+    POW  shift, and go to state 60
+    '&'  shift, and go to state 63
+    '|'  shift, and go to state 64
+    '^'  shift, and go to state 65
+    '+'  shift, and go to state 66
+    '-'  shift, and go to state 67
+    '*'  shift, and go to state 68
+    '/'  shift, and go to state 69
+    '%'  shift, and go to state 70
 
     $default  reduce using rule 44 (expression)
 
 
-State 92
+State 93
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2189,51 +2375,17 @@ State 92
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    POW  shift, and go to state 59
-    '&'  shift, and go to state 62
-    '|'  shift, and go to state 63
-    '^'  shift, and go to state 64
-    '+'  shift, and go to state 65
-    '-'  shift, and go to state 66
-    '*'  shift, and go to state 67
-    '/'  shift, and go to state 68
-    '%'  shift, and go to state 69
+    POW  shift, and go to state 60
+    '&'  shift, and go to state 63
+    '|'  shift, and go to state 64
+    '^'  shift, and go to state 65
+    '+'  shift, and go to state 66
+    '-'  shift, and go to state 67
+    '*'  shift, and go to state 68
+    '/'  shift, and go to state 69
+    '%'  shift, and go to state 70
 
     $default  reduce using rule 45 (expression)
-
-
-State 93
-
-   35 expression: expression • '+' expression
-   36           | expression • '-' expression
-   37           | expression • '*' expression
-   38           | expression • '/' expression
-   39           | expression • '%' expression
-   40           | expression • POW expression
-   41           | expression • '&' expression
-   42           | expression • '|' expression
-   43           | expression • '^' expression
-   44           | expression • LEQ expression
-   45           | expression • LNEQ expression
-   46           | expression • LAND expression
-   47           | expression • LOR expression
-   48           | expression • '<' expression
-   49           | expression • '>' expression
-   50           | expression • LTEQ expression
-   50           | expression LTEQ expression •
-   51           | expression • GTEQ expression
-
-    POW  shift, and go to state 59
-    '&'  shift, and go to state 62
-    '|'  shift, and go to state 63
-    '^'  shift, and go to state 64
-    '+'  shift, and go to state 65
-    '-'  shift, and go to state 66
-    '*'  shift, and go to state 67
-    '/'  shift, and go to state 68
-    '%'  shift, and go to state 69
-
-    $default  reduce using rule 50 (expression)
 
 
 State 94
@@ -2254,23 +2406,57 @@ State 94
    48           | expression • '<' expression
    49           | expression • '>' expression
    50           | expression • LTEQ expression
+   50           | expression LTEQ expression •
+   51           | expression • GTEQ expression
+
+    POW  shift, and go to state 60
+    '&'  shift, and go to state 63
+    '|'  shift, and go to state 64
+    '^'  shift, and go to state 65
+    '+'  shift, and go to state 66
+    '-'  shift, and go to state 67
+    '*'  shift, and go to state 68
+    '/'  shift, and go to state 69
+    '%'  shift, and go to state 70
+
+    $default  reduce using rule 50 (expression)
+
+
+State 95
+
+   35 expression: expression • '+' expression
+   36           | expression • '-' expression
+   37           | expression • '*' expression
+   38           | expression • '/' expression
+   39           | expression • '%' expression
+   40           | expression • POW expression
+   41           | expression • '&' expression
+   42           | expression • '|' expression
+   43           | expression • '^' expression
+   44           | expression • LEQ expression
+   45           | expression • LNEQ expression
+   46           | expression • LAND expression
+   47           | expression • LOR expression
+   48           | expression • '<' expression
+   49           | expression • '>' expression
+   50           | expression • LTEQ expression
    51           | expression • GTEQ expression
    51           | expression GTEQ expression •
 
-    POW  shift, and go to state 59
-    '&'  shift, and go to state 62
-    '|'  shift, and go to state 63
-    '^'  shift, and go to state 64
-    '+'  shift, and go to state 65
-    '-'  shift, and go to state 66
-    '*'  shift, and go to state 67
-    '/'  shift, and go to state 68
-    '%'  shift, and go to state 69
+    POW  shift, and go to state 60
+    '&'  shift, and go to state 63
+    '|'  shift, and go to state 64
+    '^'  shift, and go to state 65
+    '+'  shift, and go to state 66
+    '-'  shift, and go to state 67
+    '*'  shift, and go to state 68
+    '/'  shift, and go to state 69
+    '%'  shift, and go to state 70
 
     $default  reduce using rule 51 (expression)
 
 
-State 95
+State 96
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2294,7 +2480,7 @@ State 95
     $default  reduce using rule 40 (expression)
 
 
-State 96
+State 97
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2315,20 +2501,20 @@ State 96
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    POW  shift, and go to state 59
-    '&'  shift, and go to state 62
-    '|'  shift, and go to state 63
-    '^'  shift, and go to state 64
-    '+'  shift, and go to state 65
-    '-'  shift, and go to state 66
-    '*'  shift, and go to state 67
-    '/'  shift, and go to state 68
-    '%'  shift, and go to state 69
+    POW  shift, and go to state 60
+    '&'  shift, and go to state 63
+    '|'  shift, and go to state 64
+    '^'  shift, and go to state 65
+    '+'  shift, and go to state 66
+    '-'  shift, and go to state 67
+    '*'  shift, and go to state 68
+    '/'  shift, and go to state 69
+    '%'  shift, and go to state 70
 
     $default  reduce using rule 48 (expression)
 
 
-State 97
+State 98
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2349,20 +2535,20 @@ State 97
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    POW  shift, and go to state 59
-    '&'  shift, and go to state 62
-    '|'  shift, and go to state 63
-    '^'  shift, and go to state 64
-    '+'  shift, and go to state 65
-    '-'  shift, and go to state 66
-    '*'  shift, and go to state 67
-    '/'  shift, and go to state 68
-    '%'  shift, and go to state 69
+    POW  shift, and go to state 60
+    '&'  shift, and go to state 63
+    '|'  shift, and go to state 64
+    '^'  shift, and go to state 65
+    '+'  shift, and go to state 66
+    '-'  shift, and go to state 67
+    '*'  shift, and go to state 68
+    '/'  shift, and go to state 69
+    '%'  shift, and go to state 70
 
     $default  reduce using rule 49 (expression)
 
 
-State 98
+State 99
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2383,17 +2569,17 @@ State 98
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    POW  shift, and go to state 59
-    '+'  shift, and go to state 65
-    '-'  shift, and go to state 66
-    '*'  shift, and go to state 67
-    '/'  shift, and go to state 68
-    '%'  shift, and go to state 69
+    POW  shift, and go to state 60
+    '+'  shift, and go to state 66
+    '-'  shift, and go to state 67
+    '*'  shift, and go to state 68
+    '/'  shift, and go to state 69
+    '%'  shift, and go to state 70
 
     $default  reduce using rule 41 (expression)
 
 
-State 99
+State 100
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2414,17 +2600,17 @@ State 99
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    POW  shift, and go to state 59
-    '+'  shift, and go to state 65
-    '-'  shift, and go to state 66
-    '*'  shift, and go to state 67
-    '/'  shift, and go to state 68
-    '%'  shift, and go to state 69
+    POW  shift, and go to state 60
+    '+'  shift, and go to state 66
+    '-'  shift, and go to state 67
+    '*'  shift, and go to state 68
+    '/'  shift, and go to state 69
+    '%'  shift, and go to state 70
 
     $default  reduce using rule 42 (expression)
 
 
-State 100
+State 101
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2445,17 +2631,17 @@ State 100
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    POW  shift, and go to state 59
-    '+'  shift, and go to state 65
-    '-'  shift, and go to state 66
-    '*'  shift, and go to state 67
-    '/'  shift, and go to state 68
-    '%'  shift, and go to state 69
+    POW  shift, and go to state 60
+    '+'  shift, and go to state 66
+    '-'  shift, and go to state 67
+    '*'  shift, and go to state 68
+    '/'  shift, and go to state 69
+    '%'  shift, and go to state 70
 
     $default  reduce using rule 43 (expression)
 
 
-State 101
+State 102
 
    35 expression: expression • '+' expression
    35           | expression '+' expression •
@@ -2476,15 +2662,15 @@ State 101
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    POW  shift, and go to state 59
-    '*'  shift, and go to state 67
-    '/'  shift, and go to state 68
-    '%'  shift, and go to state 69
+    POW  shift, and go to state 60
+    '*'  shift, and go to state 68
+    '/'  shift, and go to state 69
+    '%'  shift, and go to state 70
 
     $default  reduce using rule 35 (expression)
 
 
-State 102
+State 103
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2505,15 +2691,15 @@ State 102
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    POW  shift, and go to state 59
-    '*'  shift, and go to state 67
-    '/'  shift, and go to state 68
-    '%'  shift, and go to state 69
+    POW  shift, and go to state 60
+    '*'  shift, and go to state 68
+    '/'  shift, and go to state 69
+    '%'  shift, and go to state 70
 
     $default  reduce using rule 36 (expression)
 
 
-State 103
+State 104
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2534,12 +2720,12 @@ State 103
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    POW  shift, and go to state 59
+    POW  shift, and go to state 60
 
     $default  reduce using rule 37 (expression)
 
 
-State 104
+State 105
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2560,12 +2746,12 @@ State 104
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    POW  shift, and go to state 59
+    POW  shift, and go to state 60
 
     $default  reduce using rule 38 (expression)
 
 
-State 105
+State 106
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2586,46 +2772,52 @@ State 105
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    POW  shift, and go to state 59
+    POW  shift, and go to state 60
 
     $default  reduce using rule 39 (expression)
 
 
-State 106
+State 107
 
    53 expression: IF expression ':' • expression ':' expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 121
-    function_expression  go to state 26
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 123
+    function_expression  go to state 32
 
 
-State 107
+State 108
 
    65 if_statement: IF expression ':' statement • ';'
    66             | IF expression ':' statement • ';' ELSE ':' statement ';'
    69             | IF expression ':' statement • ';' ELSE '{' block '}'
 
-    ';'  shift, and go to state 122
+    ';'  shift, and go to state 124
 
 
-State 108
+State 109
 
    13 statement: expression •
    35 expression: expression • '+' expression
@@ -2647,29 +2839,29 @@ State 108
    51           | expression • GTEQ expression
    53           | IF expression ':' expression • ':' expression
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
-    ':'   shift, and go to state 123
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
+    ':'   shift, and go to state 125
 
     $default  reduce using rule 13 (statement)
 
 
-State 109
+State 110
 
     3 block: block • statement ';'
     4      | block • if_statement
@@ -2679,38 +2871,44 @@ State 109
    67             | IF expression '{' block • '}' ELSE '{' block '}'
    68             | IF expression '{' block • '}' ELSE ':' statement ';'
 
-    RETURNS    shift, and go to state 4
-    EXIT       shift, and go to state 5
-    PRINT      shift, and go to state 6
-    IF         shift, and go to state 7
-    WHILE      shift, and go to state 8
-    FOR        shift, and go to state 9
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 17
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
-    '}'        shift, and go to state 124
+    RETURNS      shift, and go to state 4
+    EXIT         shift, and go to state 5
+    PRINT        shift, and go to state 6
+    IF           shift, and go to state 7
+    WHILE        shift, and go to state 8
+    FOR          shift, and go to state 9
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 22
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
+    '}'          shift, and go to state 126
 
     $default  reduce using rule 23 (expression)
 
-    statement            go to state 21
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 24
-    function_statement   go to state 25
-    function_expression  go to state 26
-    if_statement         go to state 27
-    loop_statement       go to state 28
+    type_statement       go to state 26
+    statement            go to state 27
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 30
+    function_statement   go to state 31
+    function_expression  go to state 32
+    if_statement         go to state 33
+    loop_statement       go to state 34
 
 
-State 110
+State 111
 
     3 block: block • statement ';'
     4      | block • if_statement
@@ -2718,38 +2916,44 @@ State 110
     6      | block • function_statement
    70 loop_statement: WHILE expression '{' block • '}'
 
-    RETURNS    shift, and go to state 4
-    EXIT       shift, and go to state 5
-    PRINT      shift, and go to state 6
-    IF         shift, and go to state 7
-    WHILE      shift, and go to state 8
-    FOR        shift, and go to state 9
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 17
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
-    '}'        shift, and go to state 125
+    RETURNS      shift, and go to state 4
+    EXIT         shift, and go to state 5
+    PRINT        shift, and go to state 6
+    IF           shift, and go to state 7
+    WHILE        shift, and go to state 8
+    FOR          shift, and go to state 9
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 22
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
+    '}'          shift, and go to state 127
 
     $default  reduce using rule 23 (expression)
 
-    statement            go to state 21
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 24
-    function_statement   go to state 25
-    function_expression  go to state 26
-    if_statement         go to state 27
-    loop_statement       go to state 28
+    type_statement       go to state 26
+    statement            go to state 27
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 30
+    function_statement   go to state 31
+    function_expression  go to state 32
+    if_statement         go to state 33
+    loop_statement       go to state 34
 
 
-State 111
+State 112
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2770,41 +2974,41 @@ State 111
    51           | expression • GTEQ expression
    71 loop_statement: FOR expression ':' expression • ':' expression '{' block '}'
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
-    ':'   shift, and go to state 126
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
+    ':'   shift, and go to state 128
 
 
-State 112
+State 113
 
    62 function_expression: VAR '(' expression_list ')' •
 
     $default  reduce using rule 62 (function_expression)
 
 
-State 113
+State 114
 
    63 function_expression: VAR '(' expression ')' •
 
     $default  reduce using rule 63 (function_expression)
 
 
-State 114
+State 115
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -2825,27 +3029,27 @@ State 114
    51           | expression • GTEQ expression
    58 function_statement: VAR type_statement ':' expression • ';'
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
-    ';'   shift, and go to state 127
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
+    ';'   shift, and go to state 129
 
 
-State 115
+State 116
 
     3 block: block • statement ';'
     4      | block • if_statement
@@ -2853,54 +3057,60 @@ State 115
     6      | block • function_statement
    57 function_statement: VAR type_statement '{' block • '}'
 
-    RETURNS    shift, and go to state 4
-    EXIT       shift, and go to state 5
-    PRINT      shift, and go to state 6
-    IF         shift, and go to state 7
-    WHILE      shift, and go to state 8
-    FOR        shift, and go to state 9
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 17
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
-    '}'        shift, and go to state 128
+    RETURNS      shift, and go to state 4
+    EXIT         shift, and go to state 5
+    PRINT        shift, and go to state 6
+    IF           shift, and go to state 7
+    WHILE        shift, and go to state 8
+    FOR          shift, and go to state 9
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 22
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
+    '}'          shift, and go to state 130
 
     $default  reduce using rule 23 (expression)
 
-    statement            go to state 21
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 24
-    function_statement   go to state 25
-    function_expression  go to state 26
-    if_statement         go to state 27
-    loop_statement       go to state 28
-
-
-State 116
-
-   56 input_list: input_list ',' type_statement • VAR
-
-    VAR  shift, and go to state 129
+    type_statement       go to state 26
+    statement            go to state 27
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 30
+    function_statement   go to state 31
+    function_expression  go to state 32
+    if_statement         go to state 33
+    loop_statement       go to state 34
 
 
 State 117
 
-   59 function_statement: VAR input_list ':' type_statement • ':' expression ';'
-   60                   | VAR input_list ':' type_statement • '{' block '}'
+   56 input_list: input_list ',' type_statement • VAR
 
-    ':'  shift, and go to state 130
-    '{'  shift, and go to state 131
+    VAR  shift, and go to state 131
 
 
 State 118
+
+   59 function_statement: VAR input_list ':' type_statement • ':' expression ';'
+   60                   | VAR input_list ':' type_statement • '{' block '}'
+
+    ':'  shift, and go to state 132
+    '{'  shift, and go to state 133
+
+
+State 119
 
     3 block: block • statement ';'
     4      | block • if_statement
@@ -2908,38 +3118,44 @@ State 118
     6      | block • function_statement
    61 function_statement: VAR input_list '{' block • '}'
 
-    RETURNS    shift, and go to state 4
-    EXIT       shift, and go to state 5
-    PRINT      shift, and go to state 6
-    IF         shift, and go to state 7
-    WHILE      shift, and go to state 8
-    FOR        shift, and go to state 9
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 17
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
-    '}'        shift, and go to state 132
+    RETURNS      shift, and go to state 4
+    EXIT         shift, and go to state 5
+    PRINT        shift, and go to state 6
+    IF           shift, and go to state 7
+    WHILE        shift, and go to state 8
+    FOR          shift, and go to state 9
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 22
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
+    '}'          shift, and go to state 134
 
     $default  reduce using rule 23 (expression)
 
-    statement            go to state 21
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 24
-    function_statement   go to state 25
-    function_expression  go to state 26
-    if_statement         go to state 27
-    loop_statement       go to state 28
+    type_statement       go to state 26
+    statement            go to state 27
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 30
+    function_statement   go to state 31
+    function_expression  go to state 32
+    if_statement         go to state 33
+    loop_statement       go to state 34
 
 
-State 119
+State 120
 
    20 expression_list: expression_list ',' expression •
    35 expression: expression • '+' expression
@@ -2960,28 +3176,28 @@ State 119
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
 
     $default  reduce using rule 20 (expression_list)
 
 
-State 120
+State 121
 
    19 expression_list: expression ',' expression •
    35 expression: expression • '+' expression
@@ -3002,28 +3218,70 @@ State 120
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
 
     $default  reduce using rule 19 (expression_list)
 
 
-State 121
+State 122
+
+   29 expression: type_statement VAR '=' expression •
+   35           | expression • '+' expression
+   36           | expression • '-' expression
+   37           | expression • '*' expression
+   38           | expression • '/' expression
+   39           | expression • '%' expression
+   40           | expression • POW expression
+   41           | expression • '&' expression
+   42           | expression • '|' expression
+   43           | expression • '^' expression
+   44           | expression • LEQ expression
+   45           | expression • LNEQ expression
+   46           | expression • LAND expression
+   47           | expression • LOR expression
+   48           | expression • '<' expression
+   49           | expression • '>' expression
+   50           | expression • LTEQ expression
+   51           | expression • GTEQ expression
+
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
+
+    $default  reduce using rule 29 (expression)
+
+
+State 123
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -3044,204 +3302,189 @@ State 121
    51           | expression • GTEQ expression
    53           | IF expression ':' expression • ':' expression
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
-    ':'   shift, and go to state 123
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
+    ':'   shift, and go to state 125
 
 
-State 122
+State 124
 
    65 if_statement: IF expression ':' statement ';' •
    66             | IF expression ':' statement ';' • ELSE ':' statement ';'
    69             | IF expression ':' statement ';' • ELSE '{' block '}'
 
-    ELSE  shift, and go to state 133
+    ELSE  shift, and go to state 135
 
     $default  reduce using rule 65 (if_statement)
 
 
-State 123
+State 125
 
    53 expression: IF expression ':' expression ':' • expression
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 134
-    function_expression  go to state 26
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 136
+    function_expression  go to state 32
 
 
-State 124
+State 126
 
    64 if_statement: IF expression '{' block '}' •
    67             | IF expression '{' block '}' • ELSE '{' block '}'
    68             | IF expression '{' block '}' • ELSE ':' statement ';'
 
-    ELSE  shift, and go to state 135
+    ELSE  shift, and go to state 137
 
     $default  reduce using rule 64 (if_statement)
 
 
-State 125
+State 127
 
    70 loop_statement: WHILE expression '{' block '}' •
 
     $default  reduce using rule 70 (loop_statement)
 
 
-State 126
+State 128
 
    71 loop_statement: FOR expression ':' expression ':' • expression '{' block '}'
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 136
-    function_expression  go to state 26
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 138
+    function_expression  go to state 32
 
 
-State 127
+State 129
 
    58 function_statement: VAR type_statement ':' expression ';' •
 
     $default  reduce using rule 58 (function_statement)
 
 
-State 128
+State 130
 
    57 function_statement: VAR type_statement '{' block '}' •
 
     $default  reduce using rule 57 (function_statement)
 
 
-State 129
+State 131
 
    56 input_list: input_list ',' type_statement VAR •
 
     $default  reduce using rule 56 (input_list)
 
 
-State 130
+State 132
 
    59 function_statement: VAR input_list ':' type_statement ':' • expression ';'
 
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 137
-    function_expression  go to state 26
+    type_statement       go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 139
+    function_expression  go to state 32
 
 
-State 131
+State 133
 
    60 function_statement: VAR input_list ':' type_statement '{' • block '}'
 
     $default  reduce using rule 2 (block)
 
-    block  go to state 138
+    block  go to state 140
 
 
-State 132
+State 134
 
    61 function_statement: VAR input_list '{' block '}' •
 
     $default  reduce using rule 61 (function_statement)
 
 
-State 133
+State 135
 
    66 if_statement: IF expression ':' statement ';' ELSE • ':' statement ';'
    69             | IF expression ':' statement ';' ELSE • '{' block '}'
-
-    ':'  shift, and go to state 139
-    '{'  shift, and go to state 140
-
-
-State 134
-
-   35 expression: expression • '+' expression
-   36           | expression • '-' expression
-   37           | expression • '*' expression
-   38           | expression • '/' expression
-   39           | expression • '%' expression
-   40           | expression • POW expression
-   41           | expression • '&' expression
-   42           | expression • '|' expression
-   43           | expression • '^' expression
-   44           | expression • LEQ expression
-   45           | expression • LNEQ expression
-   46           | expression • LAND expression
-   47           | expression • LOR expression
-   48           | expression • '<' expression
-   49           | expression • '>' expression
-   50           | expression • LTEQ expression
-   51           | expression • GTEQ expression
-   53           | IF expression ':' expression ':' expression •
-
-    $default  reduce using rule 53 (expression)
-
-
-State 135
-
-   67 if_statement: IF expression '{' block '}' ELSE • '{' block '}'
-   68             | IF expression '{' block '}' ELSE • ':' statement ';'
 
     ':'  shift, and go to state 141
     '{'  shift, and go to state 142
@@ -3266,29 +3509,62 @@ State 136
    49           | expression • '>' expression
    50           | expression • LTEQ expression
    51           | expression • GTEQ expression
-   71 loop_statement: FOR expression ':' expression ':' expression • '{' block '}'
+   53           | IF expression ':' expression ':' expression •
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
-    '{'   shift, and go to state 143
+    $default  reduce using rule 53 (expression)
 
 
 State 137
+
+   67 if_statement: IF expression '{' block '}' ELSE • '{' block '}'
+   68             | IF expression '{' block '}' ELSE • ':' statement ';'
+
+    ':'  shift, and go to state 143
+    '{'  shift, and go to state 144
+
+
+State 138
+
+   35 expression: expression • '+' expression
+   36           | expression • '-' expression
+   37           | expression • '*' expression
+   38           | expression • '/' expression
+   39           | expression • '%' expression
+   40           | expression • POW expression
+   41           | expression • '&' expression
+   42           | expression • '|' expression
+   43           | expression • '^' expression
+   44           | expression • LEQ expression
+   45           | expression • LNEQ expression
+   46           | expression • LAND expression
+   47           | expression • LOR expression
+   48           | expression • '<' expression
+   49           | expression • '>' expression
+   50           | expression • LTEQ expression
+   51           | expression • GTEQ expression
+   71 loop_statement: FOR expression ':' expression ':' expression • '{' block '}'
+
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
+    '{'   shift, and go to state 145
+
+
+State 139
 
    35 expression: expression • '+' expression
    36           | expression • '-' expression
@@ -3309,27 +3585,27 @@ State 137
    51           | expression • GTEQ expression
    59 function_statement: VAR input_list ':' type_statement ':' expression • ';'
 
-    LAND  shift, and go to state 53
-    LOR   shift, and go to state 54
-    LEQ   shift, and go to state 55
-    LNEQ  shift, and go to state 56
-    LTEQ  shift, and go to state 57
-    GTEQ  shift, and go to state 58
-    POW   shift, and go to state 59
-    '<'   shift, and go to state 60
-    '>'   shift, and go to state 61
-    '&'   shift, and go to state 62
-    '|'   shift, and go to state 63
-    '^'   shift, and go to state 64
-    '+'   shift, and go to state 65
-    '-'   shift, and go to state 66
-    '*'   shift, and go to state 67
-    '/'   shift, and go to state 68
-    '%'   shift, and go to state 69
-    ';'   shift, and go to state 144
+    LAND  shift, and go to state 54
+    LOR   shift, and go to state 55
+    LEQ   shift, and go to state 56
+    LNEQ  shift, and go to state 57
+    LTEQ  shift, and go to state 58
+    GTEQ  shift, and go to state 59
+    POW   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '>'   shift, and go to state 62
+    '&'   shift, and go to state 63
+    '|'   shift, and go to state 64
+    '^'   shift, and go to state 65
+    '+'   shift, and go to state 66
+    '-'   shift, and go to state 67
+    '*'   shift, and go to state 68
+    '/'   shift, and go to state 69
+    '%'   shift, and go to state 70
+    ';'   shift, and go to state 146
 
 
-State 138
+State 140
 
     3 block: block • statement ';'
     4      | block • if_statement
@@ -3337,107 +3613,81 @@ State 138
     6      | block • function_statement
    60 function_statement: VAR input_list ':' type_statement '{' block • '}'
 
-    RETURNS    shift, and go to state 4
-    EXIT       shift, and go to state 5
-    PRINT      shift, and go to state 6
-    IF         shift, and go to state 7
-    WHILE      shift, and go to state 8
-    FOR        shift, and go to state 9
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 17
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
-    '}'        shift, and go to state 145
+    RETURNS      shift, and go to state 4
+    EXIT         shift, and go to state 5
+    PRINT        shift, and go to state 6
+    IF           shift, and go to state 7
+    WHILE        shift, and go to state 8
+    FOR          shift, and go to state 9
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 22
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
+    '}'          shift, and go to state 147
 
     $default  reduce using rule 23 (expression)
 
-    statement            go to state 21
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 24
-    function_statement   go to state 25
-    function_expression  go to state 26
-    if_statement         go to state 27
-    loop_statement       go to state 28
-
-
-State 139
-
-   66 if_statement: IF expression ':' statement ';' ELSE ':' • statement ';'
-
-    RETURNS    shift, and go to state 4
-    EXIT       shift, and go to state 5
-    PRINT      shift, and go to state 6
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
-
-    $default  reduce using rule 23 (expression)
-
-    statement            go to state 146
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 24
-    function_expression  go to state 26
-
-
-State 140
-
-   69 if_statement: IF expression ':' statement ';' ELSE '{' • block '}'
-
-    $default  reduce using rule 2 (block)
-
-    block  go to state 147
+    type_statement       go to state 26
+    statement            go to state 27
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 30
+    function_statement   go to state 31
+    function_expression  go to state 32
+    if_statement         go to state 33
+    loop_statement       go to state 34
 
 
 State 141
 
-   68 if_statement: IF expression '{' block '}' ELSE ':' • statement ';'
+   66 if_statement: IF expression ':' statement ';' ELSE ':' • statement ';'
 
-    RETURNS    shift, and go to state 4
-    EXIT       shift, and go to state 5
-    PRINT      shift, and go to state 6
-    IF         shift, and go to state 29
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 30
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
+    RETURNS      shift, and go to state 4
+    EXIT         shift, and go to state 5
+    PRINT        shift, and go to state 6
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
 
     $default  reduce using rule 23 (expression)
 
+    type_statement       go to state 26
     statement            go to state 148
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 24
-    function_expression  go to state 26
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 30
+    function_expression  go to state 32
 
 
 State 142
 
-   67 if_statement: IF expression '{' block '}' ELSE '{' • block '}'
+   69 if_statement: IF expression ':' statement ';' ELSE '{' • block '}'
 
     $default  reduce using rule 2 (block)
 
@@ -3446,76 +3696,74 @@ State 142
 
 State 143
 
+   68 if_statement: IF expression '{' block '}' ELSE ':' • statement ';'
+
+    RETURNS      shift, and go to state 4
+    EXIT         shift, and go to state 5
+    PRINT        shift, and go to state 6
+    IF           shift, and go to state 35
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 36
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
+
+    $default  reduce using rule 23 (expression)
+
+    type_statement       go to state 26
+    statement            go to state 150
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 30
+    function_expression  go to state 32
+
+
+State 144
+
+   67 if_statement: IF expression '{' block '}' ELSE '{' • block '}'
+
+    $default  reduce using rule 2 (block)
+
+    block  go to state 151
+
+
+State 145
+
    71 loop_statement: FOR expression ':' expression ':' expression '{' • block '}'
 
     $default  reduce using rule 2 (block)
 
-    block  go to state 150
+    block  go to state 152
 
 
-State 144
+State 146
 
    59 function_statement: VAR input_list ':' type_statement ':' expression ';' •
 
     $default  reduce using rule 59 (function_statement)
 
 
-State 145
+State 147
 
    60 function_statement: VAR input_list ':' type_statement '{' block '}' •
 
     $default  reduce using rule 60 (function_statement)
 
 
-State 146
-
-   66 if_statement: IF expression ':' statement ';' ELSE ':' statement • ';'
-
-    ';'  shift, and go to state 151
-
-
-State 147
-
-    3 block: block • statement ';'
-    4      | block • if_statement
-    5      | block • loop_statement
-    6      | block • function_statement
-   69 if_statement: IF expression ':' statement ';' ELSE '{' block • '}'
-
-    RETURNS    shift, and go to state 4
-    EXIT       shift, and go to state 5
-    PRINT      shift, and go to state 6
-    IF         shift, and go to state 7
-    WHILE      shift, and go to state 8
-    FOR        shift, and go to state 9
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 17
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
-    '}'        shift, and go to state 152
-
-    $default  reduce using rule 23 (expression)
-
-    statement            go to state 21
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 24
-    function_statement   go to state 25
-    function_expression  go to state 26
-    if_statement         go to state 27
-    loop_statement       go to state 28
-
-
 State 148
 
-   68 if_statement: IF expression '{' block '}' ELSE ':' statement • ';'
+   66 if_statement: IF expression ':' statement ';' ELSE ':' statement • ';'
 
     ';'  shift, and go to state 153
 
@@ -3526,40 +3774,98 @@ State 149
     4      | block • if_statement
     5      | block • loop_statement
     6      | block • function_statement
-   67 if_statement: IF expression '{' block '}' ELSE '{' block • '}'
+   69 if_statement: IF expression ':' statement ';' ELSE '{' block • '}'
 
-    RETURNS    shift, and go to state 4
-    EXIT       shift, and go to state 5
-    PRINT      shift, and go to state 6
-    IF         shift, and go to state 7
-    WHILE      shift, and go to state 8
-    FOR        shift, and go to state 9
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 17
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
-    '}'        shift, and go to state 154
+    RETURNS      shift, and go to state 4
+    EXIT         shift, and go to state 5
+    PRINT        shift, and go to state 6
+    IF           shift, and go to state 7
+    WHILE        shift, and go to state 8
+    FOR          shift, and go to state 9
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 22
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
+    '}'          shift, and go to state 154
 
     $default  reduce using rule 23 (expression)
 
-    statement            go to state 21
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 24
-    function_statement   go to state 25
-    function_expression  go to state 26
-    if_statement         go to state 27
-    loop_statement       go to state 28
+    type_statement       go to state 26
+    statement            go to state 27
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 30
+    function_statement   go to state 31
+    function_expression  go to state 32
+    if_statement         go to state 33
+    loop_statement       go to state 34
 
 
 State 150
+
+   68 if_statement: IF expression '{' block '}' ELSE ':' statement • ';'
+
+    ';'  shift, and go to state 155
+
+
+State 151
+
+    3 block: block • statement ';'
+    4      | block • if_statement
+    5      | block • loop_statement
+    6      | block • function_statement
+   67 if_statement: IF expression '{' block '}' ELSE '{' block • '}'
+
+    RETURNS      shift, and go to state 4
+    EXIT         shift, and go to state 5
+    PRINT        shift, and go to state 6
+    IF           shift, and go to state 7
+    WHILE        shift, and go to state 8
+    FOR          shift, and go to state 9
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 22
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
+    '}'          shift, and go to state 156
+
+    $default  reduce using rule 23 (expression)
+
+    type_statement       go to state 26
+    statement            go to state 27
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 30
+    function_statement   go to state 31
+    function_expression  go to state 32
+    if_statement         go to state 33
+    loop_statement       go to state 34
+
+
+State 152
 
     3 block: block • statement ';'
     4      | block • if_statement
@@ -3567,66 +3873,72 @@ State 150
     6      | block • function_statement
    71 loop_statement: FOR expression ':' expression ':' expression '{' block • '}'
 
-    RETURNS    shift, and go to state 4
-    EXIT       shift, and go to state 5
-    PRINT      shift, and go to state 6
-    IF         shift, and go to state 7
-    WHILE      shift, and go to state 8
-    FOR        shift, and go to state 9
-    TRUE       shift, and go to state 10
-    FALSE      shift, and go to state 11
-    TYPE_NONE  shift, and go to state 12
-    TYPE       shift, and go to state 13
-    INT        shift, and go to state 14
-    FLOAT      shift, and go to state 15
-    STRING     shift, and go to state 16
-    VAR        shift, and go to state 17
-    '('        shift, and go to state 18
-    NOT        shift, and go to state 19
-    '['        shift, and go to state 20
-    '}'        shift, and go to state 155
+    RETURNS      shift, and go to state 4
+    EXIT         shift, and go to state 5
+    PRINT        shift, and go to state 6
+    IF           shift, and go to state 7
+    WHILE        shift, and go to state 8
+    FOR          shift, and go to state 9
+    TRUE         shift, and go to state 10
+    FALSE        shift, and go to state 11
+    TYPE_INT     shift, and go to state 12
+    TYPE_FLOAT   shift, and go to state 13
+    TYPE_STRING  shift, and go to state 14
+    TYPE_NONE    shift, and go to state 15
+    TYPE_TRUTH   shift, and go to state 16
+    TYPE_LIST    shift, and go to state 17
+    TYPE         shift, and go to state 18
+    INT          shift, and go to state 19
+    FLOAT        shift, and go to state 20
+    STRING       shift, and go to state 21
+    VAR          shift, and go to state 22
+    '('          shift, and go to state 23
+    NOT          shift, and go to state 24
+    '['          shift, and go to state 25
+    '}'          shift, and go to state 157
 
     $default  reduce using rule 23 (expression)
 
-    statement            go to state 21
-    TRUTH                go to state 22
-    list_expression      go to state 23
-    expression           go to state 24
-    function_statement   go to state 25
-    function_expression  go to state 26
-    if_statement         go to state 27
-    loop_statement       go to state 28
+    type_statement       go to state 26
+    statement            go to state 27
+    TRUTH                go to state 28
+    list_expression      go to state 29
+    expression           go to state 30
+    function_statement   go to state 31
+    function_expression  go to state 32
+    if_statement         go to state 33
+    loop_statement       go to state 34
 
 
-State 151
+State 153
 
    66 if_statement: IF expression ':' statement ';' ELSE ':' statement ';' •
 
     $default  reduce using rule 66 (if_statement)
 
 
-State 152
+State 154
 
    69 if_statement: IF expression ':' statement ';' ELSE '{' block '}' •
 
     $default  reduce using rule 69 (if_statement)
 
 
-State 153
+State 155
 
    68 if_statement: IF expression '{' block '}' ELSE ':' statement ';' •
 
     $default  reduce using rule 68 (if_statement)
 
 
-State 154
+State 156
 
    67 if_statement: IF expression '{' block '}' ELSE '{' block '}' •
 
     $default  reduce using rule 67 (if_statement)
 
 
-State 155
+State 157
 
    71 loop_statement: FOR expression ':' expression ':' expression '{' block '}' •
 
